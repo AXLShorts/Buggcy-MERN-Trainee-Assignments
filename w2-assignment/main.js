@@ -16,7 +16,7 @@ for (let i = 0; i < 10; i++) {
 }
 
 for (let i = 0; i < 9; i++) {
-  const row = document.querySelectorAll(".guess-row"); // Get the first element of the class
+  const row = document.querySelectorAll(".guess-row");
 
   if (row) {
     const overlay = document.createElement("div");
@@ -25,7 +25,7 @@ for (let i = 0; i < 9; i++) {
     overlay.style.width = "100%";
     overlay.style.height = "100%";
     overlay.style.zIndex = "10";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
     row[i].appendChild(overlay);
   }
 }
@@ -131,24 +131,22 @@ function checkGuess(guess, secretCode) {
   const unmatchedGuess = [];
   const unmatchedSecretCode = [];
 
-  // Check for correct colors in the correct place
   guess.forEach((color, index) => {
     if (color === secretCode[index]) {
-      result.push("red"); // Correct color in the correct place
+      result.push("red");
     } else {
       unmatchedGuess.push(color);
       unmatchedSecretCode.push(secretCode[index]);
     }
   });
 
-  // Check for correct colors in the wrong place
   unmatchedGuess.forEach((color) => {
     const index = unmatchedSecretCode.indexOf(color);
     if (index !== -1) {
-      result.push("white"); // Correct color in the wrong place
+      result.push("white");
       unmatchedSecretCode.splice(index, 1);
     } else {
-      result.push("black"); // Incorrect color
+      result.push("black");
     }
   });
 
