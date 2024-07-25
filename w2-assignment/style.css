@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.code {
+  display: flex;
+  gap: 24px;
+  border: 1px solid #000;
+  padding: 6px 24px;
+  div {
+    img {
+      width: 48px;
+      height: auto;
+    }
+  }
+}
+
+.code-guess {
+  display: flex;
+  flex-direction: row;
+}
+
+#guess {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #000;
+  padding: 24px;
+  position: relative;
+}
+
+.guess-row {
+  display: flex;
+  gap: 24px;
+  position: relative;
+}
+
+.guess-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  background-color: aqua;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.colors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  border: 1px solid #000;
+  padding: 24px;
+}
+
+.color {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  border: 1px solid #000;
+}
+
+.color.red {
+  background-color: #ff0000;
+}
+
+.color.green {
+  background-color: #008000;
+}
+
+.color.blue {
+  background-color: #0000ff;
+}
+
+.color.yellow {
+  background-color: #ffff00;
+}
+
+.color.purple {
+  background-color: #800080;
+}
+
+.color.orange {
+  background-color: #ffa500;
+}
+
+.color.black {
+  background-color: #000000;
+}
+
+.color.white {
+  background-color: #ffffff;
+}
+
+#result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+  padding: 24px;
+}
+
+.result-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  padding: 6px;
+}
+
+.result-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background-color: rgb(47, 9, 9);
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid #000;
+  div {
+    max-width: fit-content;
+
+    button {
+      padding: 12px;
+      border-radius: 12px;
+    }
+  }
+}
+
+/* .overlay {
+  position: absolute;
+  width: calc(100% - 48px);
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 24px;
+}
+
+.overlay.top-overlay {
+  top: 24px;
+  height: calc(100% - 160px);
+}
+
+.overlay.bottom-overlay {
+  bottom: 24px;
+  height: calc(100% - 606px);
+} */
