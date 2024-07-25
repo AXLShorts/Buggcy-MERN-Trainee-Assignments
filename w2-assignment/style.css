@@ -145,20 +145,3 @@
     }
   }
 }
-
-/* .overlay {
-  position: absolute;
-  width: calc(100% - 48px);
-  background-color: rgba(0, 0, 0, 0.5);
-  left: 24px;
-}
-
-.overlay.top-overlay {
-  top: 24px;
-  height: calc(100% - 160px);
-}
-
-.overlay.bottom-overlay {
-  bottom: 24px;
-  height: calc(100% - 606px);
-} */
