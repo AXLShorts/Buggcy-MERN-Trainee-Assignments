@@ -52,7 +52,6 @@ const colorButtons = document.querySelectorAll(".color");
 colorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentcolor = button.classList[1];
-    console.log(currentcolor);
     document.body.style.cursor = `url("Images/curser-${currentcolor}.png")20 20, auto`;
   });
 });
@@ -149,8 +148,6 @@ function checkGuess(guess, secretCode) {
       result.push("black");
     }
   });
-
-  console.log(result);
 
   return result;
 }
