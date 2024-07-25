@@ -112,6 +112,23 @@ checkButton.addEventListener("click", () => {
     box.style.backgroundColor = result[index];
   });
 
+  if (result.every((color) => color === "red")) {
+    alert("You won!");
+
+    document.body.style.cursor = "auto";
+    const actualcode = document.getElementById("code");
+    const divs = actualcode.querySelectorAll("div");
+
+    divs.forEach((div, index) => {
+      div.innerHTML = "";
+
+      if (index < secretCode.length) {
+        div.style.backgroundColor = secretCode[index];
+        div.style.border = "1px solid black";
+      }
+    });
+  }
+
   currentRow--;
 
   if (currentRow < 0) {
