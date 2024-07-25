@@ -53,7 +53,7 @@ colorButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentcolor = button.classList[1];
     console.log(currentcolor);
-    document.body.style.cursor = `url("images/curser-${currentcolor}.png")20 20, auto`;
+    document.body.style.cursor = `url("Images/curser-${currentcolor}.png")20 20, auto`;
   });
 });
 
