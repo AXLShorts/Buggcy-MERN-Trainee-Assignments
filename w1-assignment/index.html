@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+      type="module"
+    ></script>
+    <title>QuickPik</title>
+  </head>
+  <body>
+    <header>
+      <div class="wrapper">
+        <nav>
+          <div class="logo">Quick<span>Pik</span></div>
+          <ul class="middle-links">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">About us</a>
+            </li>
+            <li>
+              <a href="#">Products</a>
+            </li>
+            <li>
+              <a href="#">Services</a>
+            </li>
+            <li>
+              <a href="#">Contact us</a>
+            </li>
+          </ul>
+          <ul class="end-buttons">
+            <li>
+              <div class="btn-nav-bg">
+                <a href="#" class="btn">ShopNow</a>
+              </div>
+            </li>
+            <li class="nav-icons">
+              <a href="#">
+                <img src="Images/nav-1.svg" alt="" />
+              </a>
+              <a href="#">
+                <img src="Images/nav-2.svg" alt="" />
+              </a>
+            </li>
+          </ul>
+          <div class="mobile-nav">
+            <input type="checkbox" id="sidebar-active" />
+            <label for="sidebar-active" class="open-sidebar-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="32"
+                viewBox="0 -960 960 960"
+                width="32"
+              >
+                <path
+                  d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+                />
+              </svg>
+            </label>
+            <label id="overlay" for="sidebar-active"></label>
+            <div class="links-container">
+              <label for="sidebar-active" class="close-sidebar-button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="32"
+                  viewBox="0 -960 960 960"
+                  width="32"
+                  fill="#ffffff"
+                >
+                  <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                  />
+                </svg>
+              </label>
+
+              <a href="#">About</a>
+              <a href="#">Products</a>
+              <a href="#">Blog</a>
+              <a href="#">Login</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- End of Nav -->
+
+      <div class="search-bar-section">
+        <div class="wrapper search">
+          <div class="categories">
+            <img src="Images/search-category.svg" alt="" />
+            <p>All Categories</p>
+          </div>
+          <div class="search-bar">
+            <form action="#">
+              <input type="text" placeholder="What are you looking for?" />
+              <button type="submit">
+                <img src="Images/search-icon.svg" alt="" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- End of Search Bar -->
+      <div class="wrapper">
+        <div class="hero-section">
+          <div class="left">
+            <p class="hero-sale">30% Off on groceries</p>
+            <h1>Shop smarter,<br />not harder.</h1>
+            <div class="hero-text-animate">
+              <h2>
+                <span>Get it ordered.</span><br />
+                <span>Get it shipped.</span><br />
+                <span>Get it delivered.</span>
+              </h2>
+            </div>
+            <p>Save time, skip the lines. We've got you covered.</p>
+            <div class=".btn-hero">
+              <a href="#" class="btn">ShopNow</a>
+            </div>
+          </div>
+          <div class="right">
+            <div class="elipse">
+              <img class="hero-bg-svg" src="Images/hero-elipse.svg" alt="" />
+              <img class="hero-img" src="Images/hero-1.png" alt="" />
+              <div class="hero-testimonial-card">
+                <img src="Images/hero-avatar.png" alt="" />
+                <div>
+                  <h3>Ashely Daniels</h3>
+                  <p>
+                    "Saved me tons of time - never going back to grocery
+                    shopping!"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- End of Hero Section -->
+
+    <div class="wrapper">
+      <div class="trending-products">
+        <div class="title">
+          <h3>Trending Products</h3>
+          <img src="Images/trending-title.svg" alt="" />
+        </div>
+        <div class="trending-products-cards">
+          <div class="product-card">
+            <img src="Images/product-1.png" alt="" />
+            <p>Grocery</p>
+          </div>
+          <div class="product-card">
+            <img src="Images/product-2.png" alt="" />
+            <p>Shoes</p>
+          </div>
+          <div class="product-card">
+            <img src="Images/product-3.png" alt="" />
+            <p>Phones</p>
+          </div>
+          <div class="product-card">
+            <img src="Images/product-4.png" alt="" />
+            <p>Google Home</p>
+          </div>
+          <div class="product-card">
+            <img src="Images/product-5.png" alt="" />
+            <p>Alarm Clocks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End of Trending Products Section -->
+
+    <div class="deal-of-the-week">
+      <div class="timer">
+        <h3>Deal Of The Week</h3>
+        <div class="timer-cards">
+          <div class="timer-card">
+            <h4>10</h4>
+            <p>Days</p>
+          </div>
+          <div class="timer-card">
+            <h4>19</h4>
+            <p>Hours</p>
+          </div>
+          <div class="timer-card">
+            <h4>59</h4>
+            <p>Minutes</p>
+          </div>
+          <div class="timer-card">
+            <h4>57</h4>
+            <p>Seconds</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="cards-container">
+        <div class="card">
+          <img src="Images/deal-1.png" alt="" />
+          <div class="content">
+            <h4>Elegant Perfumes</h4>
+            <h4>$16.00</h4>
+            <ul>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+            </ul>
+            <a href="#">
+              <img src="Images/shopping-cart.svg" alt="" />
+              Buy Now
+            </a>
+          </div>
+          <div class="sale">Sale</div>
+        </div>
+        <div class="card">
+          <img src="Images/deal-2.png" alt="" />
+          <div class="content">
+            <h4>Elegant Perfumes</h4>
+            <h4>$16.00</h4>
+            <ul>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+              <li>
+                <img src="Images/checkmark.svg" alt="" />
+                <p>Long Lasting</p>
+              </li>
+            </ul>
+            <a href="#">
+              <img src="Images/shopping-cart.svg" alt="" />
+              Buy Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End of Deal of the Week Section -->
+
+    <div class="wrapper">
+      <div class="medical-section-title">
+        <h3>Medical Products</h3>
+      </div>
+      <div class="medical-cards">
+        <div class="medical-card">
+          <img src="Images/medical-1.png" alt="" />
+          <div class="medical-card-text">
+            <p>From 0.99</p>
+            <h4>Breathable<br />Face Mask</h4>
+            <a href="#"
+              >Shop now
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.22234 3.68784L2.66224 0.127804C2.5799 0.045398 2.46999 0 2.35278 0C2.23558 0 2.12566 0.045398 2.04332 0.127804L1.78115 0.389915C1.61055 0.560711 1.61055 0.838302 1.78115 1.00884L4.77065 3.99834L1.77783 6.99116C1.69549 7.07357 1.65002 7.18342 1.65002 7.30056C1.65002 7.41783 1.69549 7.52768 1.77783 7.61015L2.04 7.8722C2.12241 7.9546 2.23226 8 2.34947 8C2.46667 8 2.57659 7.9546 2.65893 7.8722L6.22234 4.30891C6.30488 4.22624 6.35021 4.11587 6.34995 3.99854C6.35021 3.88075 6.30488 3.77044 6.22234 3.68784Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="medical-card">
+          <img src="Images/medical-2.png" alt="" />
+          <div class="medical-card-text">
+            <p>From 0.99</p>
+            <h4>Medicine pack<br />Get it now 45% Off</h4>
+            <a href="#"
+              >Shop now
+              <svg
+                width="8"
+                height="8"
+                viewBox="0 0 8 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.22234 3.68784L2.66224 0.127804C2.5799 0.045398 2.46999 0 2.35278 0C2.23558 0 2.12566 0.045398 2.04332 0.127804L1.78115 0.389915C1.61055 0.560711 1.61055 0.838302 1.78115 1.00884L4.77065 3.99834L1.77783 6.99116C1.69549 7.07357 1.65002 7.18342 1.65002 7.30056C1.65002 7.41783 1.69549 7.52768 1.77783 7.61015L2.04 7.8722C2.12241 7.9546 2.23226 8 2.34947 8C2.46667 8 2.57659 7.9546 2.65893 7.8722L6.22234 4.30891C6.30488 4.22624 6.35021 4.11587 6.34995 3.99854C6.35021 3.88075 6.30488 3.77044 6.22234 3.68784Z"
+                  fill="white"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End of Medical Products -->
+
+    <div class="wrapper">
+      <div class="lottie-1-animaation">
+        <div class="up">
+          <div class="left">
+            <img
+              class="lottie-animation-background"
+              src="Images/lottie-1.png"
+              alt=""
+            />
+            <dotlottie-player
+              src="https://lottie.host/6656b3b2-765a-4d36-823c-3a55c25fd066/YQfn7CJxUn.json"
+              class="lottie-animation-1"
+              speed="1"
+              direction="1"
+              playMode="normal"
+              loop
+              autoplay
+            ></dotlottie-player>
+          </div>
+          <div class="right">
+            <h2>
+              Big city savings,<br />delivered to<br />your
+              <span>doorstep</span>
+            </h2>
+          </div>
+        </div>
+        <p>Our Actions speaks louder than WORDS</p>
+      </div>
+    </div>
+
+    <!-- End of Lottie Animation Section -->
+
+    <div class="testimonial-section">
+      <div class="wrapper">
+        <div class="testimonial-title">
+          <h3>Unlock the secrets of satisfied customers</h3>
+          <div class="switch-buttons">
+            <a href="" class="arrow-left">
+              <img src="Images/testimonial-arrow-left.svg" alt="" />
+            </a>
+            <a href="" class="arrow-right">
+              <img
+                src="Images/testimonial-arrow-left.svg"
+                style="transform: scaleX(-1)"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+        <div class="testimonial-cards">
+          <div class="testimonial-card">
+            <p>
+              "Never going back to waiting in lines! Shop smarter, get it
+              delivered with QuickPik. It's that simple."
+            </p>
+            <div class="testimonial-person">
+              <img src="Images/testimonial-1.png" alt="" />
+              <div class="testimonial-person-info">
+                <h5 class="testimonial-person-name">Albus Stella</h5>
+                <h6 class="testimonial-person-position">Manager @ Howarts</h6>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>
+              "Wide selection, even in my small town! Found everything I needed
+              for my birthday party with just a few clicks. Thanks, QuickPik!"
+            </p>
+            <div class="testimonial-person">
+              <img src="Images/testimonial-2.png" alt="" />
+              <div class="testimonial-person-info">
+                <h5 class="testimonial-person-name">Severus Snape</h5>
+                <h6 class="testimonial-person-position">Manager @ Slytherin</h6>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p>
+              "Lifesaver for busy families! Fresh groceries delivered in a flash
+              - dinner's on the table, thanks QuickPik!”
+            </p>
+            <div class="testimonial-person">
+              <img src="Images/testimonial-3.png" alt="" />
+              <div class="testimonial-person-info">
+                <h5 class="testimonial-person-name">Harry Brige</h5>
+                <h6 class="testimonial-person-position">
+                  Team Leader @ Gryffindor
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End of Testimonial Section -->
+
+    <div class="newsletter-section">
+      <div class="newsletter-body">
+        <div class="wrapper">
+          <div class="newsletter-content">
+            <img src="Images/signup.png" alt="" />
+            <div>
+              <h2>SignUp For Exclusive Offers And Discounts</h2>
+              <a href="#" class="sign-up-button">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- End of Newsletter Section -->
+
+    <footer>
+      <div class="wrapper">
+        <div class="footer-content">
+          <div class="company-socials">
+            <div class="logo" style="display: block; flex: none">
+              Quick<span>Pik</span>
+            </div>
+            <p>Shop smarter, not harder. Get it delivered.</p>
+            <div
+              class="social-icons"
+              style="display: flex; flex-direction: row; gap: 18px"
+            >
+              <a href="#">
+                <img src="Images/instagram-icon.svg" alt="" />
+              </a>
+              <a href="#">
+                <img src="Images/x-icon.svg" alt="" />
+              </a>
+              <a href="#">
+                <img src="Images/fb-icon.svg" alt="" />
+              </a>
+              <a href="#">
+                <img src="Images/youtube-icon.svg" alt="" />
+              </a>
+            </div>
+          </div>
+          <div class="quick-links">
+            <a href="#"> Quick Links </a>
+            <a href="#"> Home </a>
+            <a href="#"> About Us </a>
+            <a href="#"> Services </a>
+            <a href="#"> Products </a>
+            <a href="#"> Contact Us </a>
+          </div>
+          <div class="locations">
+            <a href="#"> Locations </a>
+            <a href="#"> Mumbai </a>
+            <a href="#"> Pune</a>
+            <a href="#"> Nagpur </a>
+            <a href="#"> Banglore </a>
+            <a href="#"> Goa </a>
+          </div>
+          <div class="lottie-2">
+            <dotlottie-player
+              src="https://lottie.host/22775303-11cf-4ba5-8b68-b32fde40e8cc/uJkQ0cWYhN.json"
+              background
+              speed="1"
+              style="width: 308px; height: 234px"
+              direction="1"
+              playMode="normal"
+              loop
+              autoplay
+            ></dotlottie-player>
+          </div>
+        </div>
+        <div class="copyright">@All Rights Reserved QuickPik</div>
+      </div>
+    </footer>
+  </body>
+</html>
