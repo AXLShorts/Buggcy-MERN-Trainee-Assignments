@@ -114,7 +114,6 @@ function generateSecretCode(withoutDuplicates) {
 const startButton = document.getElementById("start-game");
 
 startButton.addEventListener("click", () => {
-  startButton.disabled = true;
   const overlay = document.getElementById("overlay-9");
   if (overlay) {
     overlay.style.zIndex = "-1";
@@ -122,6 +121,7 @@ startButton.addEventListener("click", () => {
   const allowduplicates = document.getElementById("duplicates").checked;
   secretCode = generateSecretCode(!allowduplicates);
   console.log(secretCode);
+  startButton.disabled = true;
 });
 
 let currentRow = 10;
