@@ -8,6 +8,23 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="game-menu" id="game-menu-1">
+      <div class="game-menu-background">
+        <div class="menu-options">
+          <div class="allow-duplicates">
+            <span>Allow Duplicates</span>
+            <form action="#">
+              <input type="checkbox" id="duplicates" />
+              <label for="duplicates" class="slider"></label>
+            </form>
+          </div>
+          <div class="start-game-background">
+            <button id="start-game">Start Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="wrapper">
       <div class="game">
         <div class="code" id="code">
@@ -30,28 +47,17 @@
         </div>
         <div class="choose-color">
           <div class="colors">
-            <button class="color red"></button>
-            <button class="color blue"></button>
-            <button class="color green"></button>
-            <button class="color yellow"></button>
-            <button class="color purple"></button>
-            <button class="color orange"></button>
-            <button class="color black"></button>
-            <button class="color white"></button>
+            <button class="color red" style="--color: red"></button>
+            <button class="color blue" style="--color: blue"></button>
+            <button class="color green" style="--color: green"></button>
+            <button class="color yellow" style="--color: yellow"></button>
+            <button class="color purple" style="--color: purple"></button>
+            <button class="color orange" style="--color: orange"></button>
+            <button class="color black" style="--color: black"></button>
+            <button class="color white" style="--color: white"></button>
           </div>
         </div>
         <div class="controls">
-          <div class="allow-duplicates">
-            <form action="#">
-              <label for="duplicates">Allow Duplicates</label>
-              <input type="checkbox" id="duplicates" />
-            </form>
-          </div>
-          <div>
-            <a href="#">
-              <button id="start-game">Start Game</button>
-            </a>
-          </div>
           <div class="check">
             <button id="check-guess">Check</button>
           </div>

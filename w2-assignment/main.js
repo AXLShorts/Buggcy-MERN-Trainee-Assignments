@@ -1,3 +1,12 @@
+let currentRow = 10;
+const allowduplicates = document.getElementById("duplicates");
+let currentrowbuttons = null;
+let clickedButtons = [];
+let allowduplicatescheck = false;
+allowduplicates.addEventListener("change", () => {
+  allowduplicatescheck = allowduplicates.checked;
+});
+
 // Generate Guess Boxes
 
 const guessContainer = document.getElementById("guess");
@@ -9,7 +18,7 @@ for (let i = 0; i < 10; i++) {
   for (let j = 0; j < 4; j++) {
     const box = document.createElement("div");
 
-    box.className = "guess-box";
+    box.className = `guess-box guess-box-${j}`;
 
     row.appendChild(box);
   }
@@ -66,12 +75,29 @@ colorButtons.forEach((button) => {
 
 // Change Color of Guess Boxes
 
-const buttons = document.querySelectorAll(".guess-box");
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    button.style.backgroundColor = currentcolor;
+function currentRowColours() {
+  currentrowbuttons = document.querySelectorAll(
+    `.guess-row-${currentRow - 1} .guess-box`
+  );
+
+  clickedButtons = [];
+
+  currentrowbuttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      clickedButtons.push(button);
+      const hasDuplicateColor = clickedButtons.some(
+        (b) => b.style.backgroundColor === currentcolor
+      );
+      if (hasDuplicateColor && !allowduplicatescheck) {
+        alert("No duplicates allowed!");
+      } else {
+        button.style.backgroundColor = currentcolor;
+      }
+    });
   });
-});
+}
+
+currentRowColours();
 
 // Generate Secret Code
 
@@ -113,18 +139,17 @@ function generateSecretCode(withoutDuplicates) {
 
 const startButton = document.getElementById("start-game");
 
-startButton.addEventListener("click", () => {
+startButton.addEventListener("click", function (event) {
   const overlay = document.getElementById("overlay-9");
   if (overlay) {
     overlay.style.zIndex = "-1";
   }
-  const allowduplicates = document.getElementById("duplicates").checked;
-  secretCode = generateSecretCode(!allowduplicates);
+  secretCode = generateSecretCode(!allowduplicatescheck);
   console.log(secretCode);
-  startButton.disabled = true;
+  const gameMenu = document.getElementById("game-menu-1");
+  gameMenu.style.transition = "transform 0.5s ease-in-out";
+  gameMenu.style.transform = "translateY(-100%)";
 });
-
-let currentRow = 10;
 
 const checkButton = document.getElementById("check-guess");
 
@@ -138,7 +163,7 @@ checkButton.addEventListener("click", () => {
     guessRow[2].style.backgroundColor === "" ||
     guessRow[3].style.backgroundColor === ""
   ) {
-    console.log("Hi");
+    console.log(guessRow[0]);
     alert("Please fill all the boxes before checking your guess");
     return;
   } else {
@@ -158,6 +183,9 @@ checkButton.addEventListener("click", () => {
     if (result.every((color) => color === "red")) {
       alert("You won!");
       checkButton.disabled = true;
+      checkButton.style.backgroundColor = "grey";
+      checkButton.style.cursor = "auto";
+      checkButton.innerHTML = "You Won!";
 
       document.body.style.cursor = "auto";
       const actualcode = document.getElementById("code");
@@ -168,7 +196,8 @@ checkButton.addEventListener("click", () => {
 
         if (index < secretCode.length) {
           div.style.backgroundColor = secretCode[index];
-          div.style.border = "1px solid black";
+          div.style.width = "36px";
+          div.style.height = "36px";
         }
         const overlay = document.getElementById(`overlay-${currentRow - 1}`);
         if (overlay) {
@@ -177,10 +206,15 @@ checkButton.addEventListener("click", () => {
       });
     } else {
       currentRow--;
+      currentRowColours();
 
       if (currentRow - 1 < 0) {
         checkButton.disabled = true;
         alert("You lost!");
+        checkButton.disabled = true;
+        checkButton.style.backgroundColor = "grey";
+        checkButton.style.cursor = "auto";
+        checkButton.innerHTML = "You Lost!";
         document.body.style.cursor = "auto";
         const actualcode = document.getElementById("code");
         const divs = actualcode.querySelectorAll("div");
@@ -191,6 +225,8 @@ checkButton.addEventListener("click", () => {
           if (index < secretCode.length) {
             div.style.backgroundColor = secretCode[index];
             div.style.border = "1px solid black";
+            div.style.width = "36px";
+            div.style.height = "36px";
           }
         });
       }
@@ -234,3 +270,5 @@ function checkGuess(guess, secretCode) {
 
   return result;
 }
+
+const checkingsomething = document.getElementById("check-guess");
