@@ -29,7 +29,7 @@ for (let i = 0; i < 10; i++) {
     overlay.style.width = "100%";
     overlay.style.height = "100%";
     overlay.style.zIndex = "10";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
     row[i].appendChild(overlay);
   }
 }
