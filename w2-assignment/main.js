@@ -1,3 +1,5 @@
+// Generate Guess Boxes
+
 const guessContainer = document.getElementById("guess");
 
 for (let i = 0; i < 10; i++) {
@@ -15,7 +17,9 @@ for (let i = 0; i < 10; i++) {
   guessContainer.appendChild(row);
 }
 
-for (let i = 0; i < 9; i++) {
+// Generate Overlay Over Guess Boxes
+
+for (let i = 0; i < 10; i++) {
   const row = document.querySelectorAll(".guess-row");
 
   if (row) {
@@ -25,10 +29,12 @@ for (let i = 0; i < 9; i++) {
     overlay.style.width = "100%";
     overlay.style.height = "100%";
     overlay.style.zIndex = "10";
-    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     row[i].appendChild(overlay);
   }
 }
+
+// Generate Result Boxes
 
 const resultContainer = document.getElementById("result");
 
@@ -46,6 +52,8 @@ for (let i = 0; i < 10; i++) {
   resultContainer.appendChild(row);
 }
 
+// Changing Cursor and Keep Track of Current Color
+
 let currentcolor = "";
 
 const colorButtons = document.querySelectorAll(".color");
@@ -56,12 +64,16 @@ colorButtons.forEach((button) => {
   });
 });
 
+// Change Color of Guess Boxes
+
 const buttons = document.querySelectorAll(".guess-box");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     button.style.backgroundColor = currentcolor;
   });
 });
+
+// Generate Secret Code
 
 const colors = [
   "red",
@@ -100,53 +112,93 @@ function generateSecretCode(withoutDuplicates) {
 const secretCode = generateSecretCode(true);
 console.log(secretCode);
 
-let currentRow = 9;
+// Game Logic
+
+const overlay = document.getElementById("overlay-9");
+if (overlay) {
+  overlay.style.zIndex = "-1";
+}
+
+let currentRow = 10;
 
 const checkButton = document.getElementById("check-guess");
 
 checkButton.addEventListener("click", () => {
   const guessRow = document.querySelectorAll(
-    `.guess-row-${currentRow} .guess-box`
+    `.guess-row-${currentRow - 1} .guess-box`
   );
-  const guess = [];
-  guessRow.forEach((box) => {
-    guess.push(box.style.backgroundColor);
-  });
-
-  const resultRow = document.querySelectorAll(
-    `.result-row-${currentRow} .result-box`
-  );
-  const result = checkGuess(guess, secretCode);
-  resultRow.forEach((box, index) => {
-    box.style.backgroundColor = result[index];
-  });
-
-  if (result.every((color) => color === "red")) {
-    alert("You won!");
-
-    document.body.style.cursor = "auto";
-    const actualcode = document.getElementById("code");
-    const divs = actualcode.querySelectorAll("div");
-
-    divs.forEach((div, index) => {
-      div.innerHTML = "";
-
-      if (index < secretCode.length) {
-        div.style.backgroundColor = secretCode[index];
-        div.style.border = "1px solid black";
-      }
+  if (
+    guessRow[0].style.backgroundColor === "" ||
+    guessRow[1].style.backgroundColor === "" ||
+    guessRow[2].style.backgroundColor === "" ||
+    guessRow[3].style.backgroundColor === ""
+  ) {
+    console.log("Hi");
+    alert("Please fill all the boxes before checking your guess");
+    return;
+  } else {
+    const guess = [];
+    guessRow.forEach((box) => {
+      guess.push(box.style.backgroundColor);
     });
-  }
 
-  currentRow--;
+    const resultRow = document.querySelectorAll(
+      `.result-row-${currentRow - 1} .result-box`
+    );
+    const result = checkGuess(guess, secretCode);
+    resultRow.forEach((box, index) => {
+      box.style.backgroundColor = result[index];
+    });
 
-  if (currentRow < 0) {
-    checkButton.disabled = true;
-  }
+    if (result.every((color) => color === "red")) {
+      alert("You won!");
+      checkButton.disabled = true;
 
-  const overlay = document.getElementById(`overlay-${currentRow}`);
-  if (overlay) {
-    overlay.remove();
+      document.body.style.cursor = "auto";
+      const actualcode = document.getElementById("code");
+      const divs = actualcode.querySelectorAll("div");
+
+      divs.forEach((div, index) => {
+        div.innerHTML = "";
+
+        if (index < secretCode.length) {
+          div.style.backgroundColor = secretCode[index];
+          div.style.border = "1px solid black";
+        }
+        const overlay = document.getElementById(`overlay-${currentRow - 1}`);
+        if (overlay) {
+          overlay.style.zIndex = "10";
+        }
+      });
+    } else {
+      currentRow--;
+
+      if (currentRow - 1 < 0) {
+        checkButton.disabled = true;
+        alert("You lost!");
+        document.body.style.cursor = "auto";
+        const actualcode = document.getElementById("code");
+        const divs = actualcode.querySelectorAll("div");
+
+        divs.forEach((div, index) => {
+          div.innerHTML = "";
+
+          if (index < secretCode.length) {
+            div.style.backgroundColor = secretCode[index];
+            div.style.border = "1px solid black";
+          }
+        });
+      }
+
+      const overlay = document.getElementById(`overlay-${currentRow - 1}`);
+      if (overlay) {
+        overlay.style.zIndex = "-1";
+      }
+      const previousOverlay = document.getElementById(`overlay-${currentRow}`);
+      if (previousOverlay) {
+        previousOverlay.style.zIndex = "10";
+      }
+    }
   }
 });
 
