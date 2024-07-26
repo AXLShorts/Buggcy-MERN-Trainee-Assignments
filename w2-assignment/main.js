@@ -109,15 +109,20 @@ function generateSecretCode(withoutDuplicates) {
   return secretCode;
 }
 
-const secretCode = generateSecretCode(true);
-console.log(secretCode);
-
 // Game Logic
 
-const overlay = document.getElementById("overlay-9");
-if (overlay) {
-  overlay.style.zIndex = "-1";
-}
+const startButton = document.getElementById("start-game");
+
+startButton.addEventListener("click", () => {
+  startButton.disabled = true;
+  const overlay = document.getElementById("overlay-9");
+  if (overlay) {
+    overlay.style.zIndex = "-1";
+  }
+  const allowduplicates = document.getElementById("duplicates").checked;
+  secretCode = generateSecretCode(!allowduplicates);
+  console.log(secretCode);
+});
 
 let currentRow = 10;
 
