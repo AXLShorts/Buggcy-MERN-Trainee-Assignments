@@ -63,7 +63,16 @@ buttons.forEach((button) => {
   });
 });
 
-const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
+const colors = [
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "purple",
+  "orange",
+  "black",
+  "white",
+];
 
 function generateSecretCode(withoutDuplicates) {
   let secretCode = [];
