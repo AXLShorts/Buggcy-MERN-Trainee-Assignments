@@ -92,6 +92,7 @@ function currentRowColours() {
         alert("No duplicates allowed!");
       } else {
         button.style.backgroundColor = currentcolor;
+        document.body.style.cursor = "auto";
       }
     });
   });
