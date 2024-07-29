@@ -149,6 +149,8 @@ startButton.addEventListener("click", function (event) {
   const gameMenu = document.getElementById("game-menu-1");
   gameMenu.style.transition = "transform 0.5s ease-in-out";
   gameMenu.style.transform = "translateY(-110%)";
+  console.log(allowduplicates.checked);
+  console.log(allowduplicatescheck);
 });
 
 const checkButton = document.getElementById("check-guess");
@@ -272,3 +274,21 @@ function checkGuess(guess, secretCode) {
 }
 
 const checkingsomething = document.getElementById("check-guess");
+
+const checkbox = document.getElementById("duplicates");
+
+function saveCheckboxState() {
+  localStorage.setItem("checkboxState", checkbox.checked);
+}
+
+function loadCheckboxState() {
+  const savedState = localStorage.getItem("checkboxState");
+  if (savedState !== null) {
+    checkbox.checked = JSON.parse(savedState);
+    allowduplicatescheck = checkbox.checked;
+  }
+}
+
+checkbox.addEventListener("change", saveCheckboxState);
+
+document.addEventListener("DOMContentLoaded", loadCheckboxState);
