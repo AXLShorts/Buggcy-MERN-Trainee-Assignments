@@ -158,7 +158,6 @@ button {
   background-color: #9b9c82;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
   z-index: 10;
-  animation: fadein 1s;
 }
 
 .game-menu-background {
@@ -246,11 +245,17 @@ button {
   text-align: center;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+.rules {
+  width: 100%;
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #8fbb99;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-size: 24px;
+    text-align: center;
   }
 }

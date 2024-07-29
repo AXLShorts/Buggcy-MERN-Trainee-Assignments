@@ -149,8 +149,6 @@ startButton.addEventListener("click", function (event) {
   const gameMenu = document.getElementById("game-menu-1");
   gameMenu.style.transition = "transform 0.5s ease-in-out";
   gameMenu.style.transform = "translateY(-110%)";
-  console.log(allowduplicates.checked);
-  console.log(allowduplicatescheck);
 });
 
 const checkButton = document.getElementById("check-guess");
