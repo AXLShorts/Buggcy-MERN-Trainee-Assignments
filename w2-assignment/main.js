@@ -88,11 +88,18 @@ function currentRowColours() {
       const hasDuplicateColor = clickedButtons.some(
         (b) => b.style.backgroundColor === currentcolor
       );
-      if (hasDuplicateColor && !allowduplicatescheck) {
-        alert("No duplicates allowed!");
+      if (currentcolor === "") {
+        alert("Please select a color first");
       } else {
-        button.style.backgroundColor = currentcolor;
-        document.body.style.cursor = "auto";
+        if (hasDuplicateColor && !allowduplicatescheck) {
+          alert("No duplicates allowed!");
+        } else {
+          button.style.backgroundColor = currentcolor;
+          if (!allowduplicatescheck) {
+            document.body.style.cursor = "auto";
+            currentcolor = "";
+          }
+        }
       }
     });
   });
@@ -145,6 +152,8 @@ startButton.addEventListener("click", function (event) {
   if (overlay) {
     overlay.style.zIndex = "-1";
   }
+  document.body.style.overflowX = "hidden";
+  document.body.style.overflowY = "scroll";
   secretCode = generateSecretCode(!allowduplicatescheck);
   console.log(secretCode);
   const gameMenu = document.getElementById("game-menu-1");
