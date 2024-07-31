@@ -11,10 +11,32 @@
   font-family: Poppins, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding: 90px;
+}
+
 body {
   background-color: #f3f0fb;
 }
 
 .swiper-pagination-bullet-active {
   background-color: #ffffff !important;
+  border-radius: 10px !important;
+  width: 20px !important;
+}
+
+@media (max-width: 500px) {
+  .swiper-pagination-bullet {
+    width: 1.5vw !important;
+    height: 1.5vw !important;
+  }
+}
+
+.truncate-2-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

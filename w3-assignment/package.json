@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "locomotive-scroll": "^5.0.0-beta.13",
+    "lucide": "^0.417.0",
+    "lucide-react": "^0.417.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^6.25.1",

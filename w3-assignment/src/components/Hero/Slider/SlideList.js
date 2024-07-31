@@ -1,6 +1,6 @@
 export const SlideList = [
   {
-    title: "Summer Sale Extravaganza",
+    title: "Summer Weekend Sale",
     sale: "Starting From: $29.99",
     image: "src/assets/hero/1.png",
     color: "#d5e5ec",
