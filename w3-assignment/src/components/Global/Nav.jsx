@@ -18,7 +18,7 @@ const Nav = () => {
           </h1>
         </Link>
         <button className="relative">
-          <img src="src/assets/cart.webp" alt="" className="w-12 h-12" />
+          <img src="/assets/cart.webp" alt="" className="w-12 h-12" />
           <div className="absolute px-1 bg-[#ff0000] text-white rounded-full -bottom-1 -right-1 flex justify-center items-center">
             {totalQuantity}
           </div>
