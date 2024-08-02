@@ -4,7 +4,7 @@ import { devtools, persist } from "zustand/middleware";
 
 const useCartStore = (set) => ({
   cart: [],
-  addToCart: (product) =>
+  addToCart: (product, quantity) =>
     set((state) => {
       const existingProduct = state.cart.find(
         (item) => item.product.id === product.id
@@ -13,12 +13,12 @@ const useCartStore = (set) => ({
         return {
           cart: state.cart.map((item) =>
             item.product.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: item.quantity + quantity }
               : item
           ),
         };
       } else {
-        return { cart: [...state.cart, { product, quantity: 1 }] };
+        return { cart: [...state.cart, { product, quantity: quantity }] };
       }
     }),
   removeFromCart: (productId) =>

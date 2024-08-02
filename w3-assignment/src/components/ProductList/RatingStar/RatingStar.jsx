@@ -38,25 +38,22 @@ const RatingStars = ({ rating, totalRatings, totalStars = 5 }) => {
   const partialStar = rating - fullStars;
 
   return (
-    <div className="flex px-4 items-center">
-      {stars.map((_, index) => {
-        const isFull = index < fullStars;
-        const isPartial = index === fullStars && partialStar > 0;
-        const formattedRating = Number.isFinite(rating)
-          ? rating.toFixed(1)
-          : "N/A";
-        return (
-          <Star
-            key={index}
-            filled={isFull}
-            partial={isPartial ? partialStar * 100 : 0}
-          />
-        );
-      })}
-      <p className="text-[14px] pt-0.5 pl-2 m-0">{rating}</p>
-      <p className="text-[14px] pt-0.5 pl-2 m-0 text-gray-400">
-        ({totalRatings})
-      </p>
+    <div className="flex items-center gap-2">
+      <div className="flex">
+        {stars.map((_, index) => {
+          const isFull = index < fullStars;
+          const isPartial = index === fullStars && partialStar > 0;
+          return (
+            <Star
+              key={index}
+              filled={isFull}
+              partial={isPartial ? partialStar * 100 : 0}
+            />
+          );
+        })}
+      </div>
+      <p className="text-[14px] pt-0.5 m-0">{rating}</p>
+      <p className="text-[14px] pt-0.5 m-0 text-gray-400">({totalRatings})</p>
     </div>
   );
 };

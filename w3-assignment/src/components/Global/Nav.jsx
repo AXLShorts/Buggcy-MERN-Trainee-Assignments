@@ -17,12 +17,12 @@ const Nav = () => {
             Tempest
           </h1>
         </Link>
-        <button className="relative">
+        <Link to="/cart" className="relative">
           <img src="/assets/cart.webp" alt="" className="w-12 h-12" />
           <div className="absolute px-1 bg-[#ff0000] text-white rounded-full -bottom-1 -right-1 flex justify-center items-center">
             {totalQuantity}
           </div>
-        </button>
+        </Link>
       </div>
     </nav>
   );

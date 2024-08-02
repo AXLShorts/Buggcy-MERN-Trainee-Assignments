@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <header className=" flex flex-col items-center max-w-screen-2xl mx-auto">
       <Slider />
-      <ProductList />
+      <ProductList categoryLink={true} />
     </header>
   );
 };

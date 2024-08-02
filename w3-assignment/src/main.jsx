@@ -12,7 +12,9 @@ const fetcher = (url) => api.get(url).then((res) => res.data);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <SWRConfig value={{ fetcher }}>
+    <SWRConfig
+      value={{ fetcher, revalidateOnFocus: true, dedupingInterval: 2000 }}
+    >
       <Router>
         <Nav />
         <App />
