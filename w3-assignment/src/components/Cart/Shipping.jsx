@@ -15,7 +15,7 @@ const Shipping = ({ checkout, shippingCost, discounted }) => {
     .toFixed(2);
   const isDisabled = subtotal <= 0;
   return (
-    <div className="flex shadow border h-full flex-col">
+    <div className="flex shadow border flex-col">
       <div className="w-full p-4 border text-xl font-semibold">
         Order Summary
       </div>
@@ -121,12 +121,14 @@ const Shipping = ({ checkout, shippingCost, discounted }) => {
           }`}
         >
           <Link
-            to={`/checkout/checkout=true/${shipping}/${discount}`}
+            to={
+              checkout ? `/checkout/checkout=true/${shipping}/${discount}` : "#"
+            }
             className={`w-full p-2 text-white text-center ${
               isDisabled ? "pointer-events-none" : ""
             }`}
           >
-            Proceed To Checkout
+            {checkout ? "Place Order" : "Proceed to Checkout"}
           </Link>
         </button>
       </div>
