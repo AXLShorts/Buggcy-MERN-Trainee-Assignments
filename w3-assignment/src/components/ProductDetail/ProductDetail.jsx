@@ -8,6 +8,13 @@ const ProductDetail = ({ productData }) => {
   const category = productData.category;
   const [quantity, setQuantity] = useState(1);
 
+  const handleChange = (e) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    if (!isNaN(newQuantity) && newQuantity > 0 && newQuantity < 11) {
+      setQuantity(newQuantity);
+    }
+  };
+
   return (
     <div className="py-24 max-w-screen-2xl mx-auto flex flex-col md:flex-row px-4 2xl:px-0 gap-8">
       <div className="basis-1/2 bg-white rounded-lg p-4">
@@ -47,15 +54,19 @@ const ProductDetail = ({ productData }) => {
               </button>
               <input
                 type="number"
-                min={0}
+                min={1}
+                max={10}
                 step={1}
                 value={quantity}
+                onChange={handleChange}
                 className="text-lg font-regular p-1 border-2 border-gray-300 rounded-lg no-arrows text-center sm:w-36 w-24"
               />
               <button
                 className="absolute text-lg my-auto right-0 px-3 h-[100%]  border-gray-300"
                 onClick={() => {
-                  setQuantity(quantity + 1);
+                  if (quantity < 10) {
+                    setQuantity(quantity + 1);
+                  }
                 }}
               >
                 <div className="flex justify-center items-center font-regular">

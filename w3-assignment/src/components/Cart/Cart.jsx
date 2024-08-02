@@ -10,7 +10,9 @@ const Cart = () => {
   const cartItemsLength = cart.length;
 
   const handleIncrement = (productId, currentQuantity) => {
-    updateQuantity(productId, currentQuantity + 1);
+    if (currentQuantity < 99) {
+      updateQuantity(productId, currentQuantity + 1);
+    }
   };
   const handleDecrement = (productId, currentQuantity) => {
     if (currentQuantity > 1) {
@@ -21,7 +23,8 @@ const Cart = () => {
   };
   const handleChange = (productId, e) => {
     const quantity = parseInt(e.target.value, 10);
-    if (!isNaN(quantity) && quantity > 0) {
+
+    if (!isNaN(quantity) && quantity > 0 && quantity < 100) {
       updateQuantity(productId, quantity);
     } else if (quantity === 0) {
       removeFromCart(productId);
@@ -87,6 +90,7 @@ const Cart = () => {
                             </button>
                             <input
                               type="number"
+                              max={99}
                               className="max-w-16 no-arrows text-center"
                               value={item.quantity}
                               onChange={(e) => {
@@ -129,6 +133,7 @@ const Cart = () => {
                       </button>
                       <input
                         type="number"
+                        max={99}
                         className="max-w-16 no-arrows text-center"
                         value={item.quantity}
                         onChange={(e) => {

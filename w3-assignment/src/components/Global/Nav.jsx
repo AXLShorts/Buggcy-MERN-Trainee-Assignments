@@ -12,7 +12,7 @@ const Nav = () => {
         style={{ backgroundColor: "rgba(243, 240, 251,0.2)" }}
         className="w-full max-w-screen-2xl mx-auto flex justify-between p-4 border border-t-0 border-r-0 border-l-0 border-b-1 border-[#0e081b]"
       >
-        <Link to="/">
+        <Link to="/" className="flex items-center">
           <h1 className="font-logo text-4xl font-extrabold text-[#0e081b]">
             Tempest
           </h1>

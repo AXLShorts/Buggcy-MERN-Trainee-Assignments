@@ -25,7 +25,7 @@ const App = () => {
       element: <CartPage />,
     },
     {
-      path: "/checkout",
+      path: "/checkout/:checkout/:shippingCost/:discount",
       element: <CheckoutPage />,
     },
   ]);
