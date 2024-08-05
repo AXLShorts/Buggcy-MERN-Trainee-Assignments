@@ -12,6 +12,8 @@ const ProductList = ({ categoryLink }) => {
 
   const categoryNames = Object.keys(groupedProducts);
 
+  console.log(groupedProducts);
+
   return (
     <div className="mt-8 sm:mt-16 max-w-screen-2xl w-full flex flex-col gap-8">
       {categoryLink && (

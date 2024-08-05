@@ -1,7 +1,11 @@
 import useSWR from "swr";
 
 const useProduct = ({ single }) => {
-  const { data, error } = useSWR(`products/${single}`);
+  if (single) {
+    const { data, error } = useSWR(`products/${single}`);
+  } else {
+    const { data, error } = useSWR("products");
+  }
   return {
     product: data,
     isLoading: !error && !data,

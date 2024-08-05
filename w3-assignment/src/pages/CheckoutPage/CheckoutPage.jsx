@@ -8,7 +8,7 @@ const CheckoutPage = () => {
   return (
     <header className="max-w-screen-2xl w-full mx-auto">
       <div className="pt-24 flex flex-col md:flex-row gap-4">
-        <div className="flex basis-2/3 bg-purple-100">
+        <div className="flex basis-2/3">
           <OrderForm />
         </div>
         <div className="basis-1/3 ">
