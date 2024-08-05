@@ -9,7 +9,9 @@ const Star = ({ filled, partial }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={` w-4 h-4 ${filled ? "text-yellow-300" : "text-gray-300"}`}
+      className={` w-2.5 h-2.5 sm:w-4 sm:h-4 ${
+        filled ? "text-yellow-300" : "text-gray-300"
+      }`}
       viewBox="0 0 24 24"
       fill="currentColor"
       stroke="currentColor"
@@ -52,8 +54,10 @@ const RatingStars = ({ rating, totalRatings, totalStars = 5 }) => {
           );
         })}
       </div>
-      <p className="text-[14px] pt-0.5 m-0">{rating}</p>
-      <p className="text-[14px] pt-0.5 m-0 text-gray-400">({totalRatings})</p>
+      <p className="text-[12px] sm:text-[14px] pt-0.5 m-0">{rating}</p>
+      <p className="text-[12px] sm:text-[14px] pt-0.5 m-0 text-gray-400">
+        ({totalRatings})
+      </p>
     </div>
   );
 };

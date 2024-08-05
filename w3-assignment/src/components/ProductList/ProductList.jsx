@@ -3,7 +3,7 @@ import Category from "./Category";
 import groupByCategory from "../../utils/groupByCategory";
 
 const ProductList = ({ categoryLink }) => {
-  const { products, isLoading, isError } = useProducts();
+  const { products, isLoading, isError } = useProducts({ single: false });
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading products</div>;
@@ -11,8 +11,6 @@ const ProductList = ({ categoryLink }) => {
   const groupedProducts = groupByCategory(products);
 
   const categoryNames = Object.keys(groupedProducts);
-
-  console.log(groupedProducts);
 
   return (
     <div className="mt-8 sm:mt-16 max-w-screen-2xl w-full flex flex-col gap-8">

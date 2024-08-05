@@ -34,8 +34,10 @@ const Cart = () => {
   return (
     <div className="flex flex-col w-full basis-2/3">
       <div className="flex justify-between p-4 items-center border-b-2 border-gray-200 px-4 2xl:px-0">
-        <h2 className="font-bold text-2xl">Shopping Cart</h2>
-        <h3 className="font-semibold text-xl">{cartItemsLength} Items</h3>
+        <h2 className="font-bold text-xl sm:text-2xl">Shopping Cart</h2>
+        <h3 className="font-semibold text-lg sm:text-xl">
+          {cartItemsLength} Items
+        </h3>
       </div>
       <div className="w-full">
         <table className="w-full">
@@ -49,9 +51,9 @@ const Cart = () => {
           <tbody>
             {cart.map((item) => (
               <tr key={item.product.id} className="text-center">
-                <td className="p-2 text-left">
-                  <div className="flex gap-2 w-full">
-                    <div className="min-w-24 w-36 my-auto">
+                <td className="p-2 text-left max-w-[300px] sm:max-w-full">
+                  <div className="flex gap-2">
+                    <div className="min-w-18 w-36 my-auto">
                       <Link to={`/products/${item.product.id}`}>
                         <img
                           src={item.product.image}
@@ -79,7 +81,7 @@ const Cart = () => {
                             $ {(item.quantity * item.product.price).toFixed(2)}
                           </div>
 
-                          <div className="relative flex ml-auto">
+                          <div className="relative flex  ml-auto max-w-[118px]">
                             <button
                               className="text-lg px-2"
                               onClick={() => {
@@ -91,7 +93,7 @@ const Cart = () => {
                             <input
                               type="number"
                               max={99}
-                              className="max-w-16 no-arrows text-center"
+                              className="max-w-8 no-arrows text-center"
                               value={item.quantity}
                               onChange={(e) => {
                                 handleChange(item.product.id, e);

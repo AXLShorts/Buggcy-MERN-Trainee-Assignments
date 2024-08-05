@@ -1,16 +1,16 @@
 import Category from "../ProductList/Category";
-import useCategory from "../../hooks/useCategory";
+import useProducts from "../../hooks/useProducts";
 import groupByCategory from "../../utils/groupByCategory";
 
 const CategoryItems = ({ category }) => {
-  const { categoryData, categoryLoading, categoryError } = useCategory({
-    categoryName: category,
+  const { products, isLoading, isError } = useProducts({
+    category: category,
   });
 
-  if (categoryLoading) return <div>Loading...</div>;
-  if (categoryError) return <div>Error loading products</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading products</div>;
 
-  const groupedProducts = groupByCategory(categoryData);
+  const groupedProducts = groupByCategory(products);
   return (
     <div>
       {Object.keys(groupedProducts).map((category, index) => (

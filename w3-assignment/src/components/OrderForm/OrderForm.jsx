@@ -18,6 +18,9 @@ const OrderForm = () => {
 
   return (
     <div className="w-full mx-auto border p-4 shadow">
+      <div className="w-full  pb-8 text-xl font-semibold">
+        Shipping & Billing
+      </div>
       <form
         onSubmit={formik.handleSubmit}
         className="flex flex-col md:flex-row md:flex-wrap gap-2"
