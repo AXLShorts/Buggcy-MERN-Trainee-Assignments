@@ -43,11 +43,18 @@ const Category = ({ title, products: initialProducts, categoryId }) => {
         `https://fakestoreapi.com/products`,
         values
       );
+      const newId =
+        products[products.length - 1].id === 20
+          ? 1
+          : products[products.length - 1].id + 1;
       const updatedProduct = {
         ...response.data,
+        id: newId,
         rating: { rate: 0, count: 0 },
       };
+
       console.log(updatedProduct);
+
       setProducts((prevProducts) => [...prevProducts, updatedProduct]);
     }
   };

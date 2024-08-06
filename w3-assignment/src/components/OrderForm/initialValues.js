@@ -1,10 +1,10 @@
 export const initialValues = {
-  name: "",
-  email: "",
-  phone: "",
-  address: "",
+  name: null,
+  email: null,
+  phone: null,
+  address: null,
   paymentMethod: "COD",
-  cardNumber: "",
-  cardExpiry: "",
-  cardCVV: "",
+  cardNumber: null,
+  cardExpiry: null,
+  cardCVV: null,
 };

@@ -5,7 +5,19 @@ import groupByCategory from "../../utils/groupByCategory";
 const ProductList = ({ categoryLink }) => {
   const { products, isLoading, isError } = useProducts({ single: false });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="py-10">
+        <l-trefoil
+          size="40"
+          stroke="4"
+          stroke-length="0.15"
+          bg-opacity="0.1"
+          speed="1.4"
+          color="black"
+        ></l-trefoil>
+      </div>
+    );
   if (isError) return <div>Error loading products</div>;
 
   const groupedProducts = groupByCategory(products);

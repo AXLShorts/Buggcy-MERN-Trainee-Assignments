@@ -114,23 +114,23 @@ const Shipping = ({ checkout, shippingCost, discounted }) => {
             </tr>
           </tbody>
         </table>
-        <button
-          disabled={isDisabled}
-          className={`p-2 mt-2 w-full flex ${
-            isDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-[#0e081b]"
-          }`}
-        >
-          <Link
-            to={
-              checkout ? "#" : `/checkout/checkout=true/${shipping}/${discount}`
-            }
-            className={`w-full p-2 text-white text-center ${
-              isDisabled ? "pointer-events-none" : ""
+        {!checkout && (
+          <button
+            disabled={isDisabled}
+            className={`p-2 mt-2 w-full flex ${
+              isDisabled ? "bg-gray-400 cursor-not-allowed" : "bg-[#0e081b]"
             }`}
           >
-            {checkout ? "Place Order" : "Proceed to Checkout"}
-          </Link>
-        </button>
+            <Link
+              to={`/checkout/checkout=true/${shipping}/${discount}`}
+              className={`w-full p-2 text-white text-center ${
+                isDisabled ? "pointer-events-none" : ""
+              }`}
+            >
+              Proceed to Checkout
+            </Link>
+          </button>
+        )}
       </div>
     </div>
   );

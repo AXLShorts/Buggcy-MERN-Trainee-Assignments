@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { initialValues } from "./initialValues";
 import { validationSchema } from "./formValidation";
+import "ldrs/trefoil";
 
 const OrderForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("COD");
@@ -194,6 +195,14 @@ const OrderForm = () => {
             </div>
           </>
         )}
+        <div>
+          <button
+            type="submit"
+            className="w-full px-4 py-2 bg-[#0e081b] text-white rounded-md"
+          >
+            Place Order
+          </button>
+        </div>
       </form>
     </div>
   );

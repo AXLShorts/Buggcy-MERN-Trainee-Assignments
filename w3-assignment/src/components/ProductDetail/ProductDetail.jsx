@@ -2,8 +2,13 @@
 import RatingStars from "../../components/ProductList/RatingStar/RatingStar";
 import useCart from "../../hooks/useCart";
 import { useState } from "react";
+import { Pencil } from "lucide-react";
+import AddUpdate from "../Global/AddUpdate";
+import axios from "axios";
 
-const ProductDetail = ({ productData }) => {
+const ProductDetail = ({ productData: singleProduct }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [productData, setProductData] = useState(singleProduct);
   const addToCart = useCart((state) => state.addToCart);
   const category = productData.category;
   const [quantity, setQuantity] = useState(1);
@@ -14,21 +19,45 @@ const ProductDetail = ({ productData }) => {
       setQuantity(newQuantity);
     }
   };
+  const closeDialog = () => {
+    setIsOpen(false);
+  };
+
+  const handleFormSubmit = async (values) => {
+    const response = await axios.put(
+      `https://fakestoreapi.com/products/${productData.id}`,
+      values
+    );
+    const updatedProduct = { ...response.data, rating: productData.rating };
+    setProductData(updatedProduct);
+  };
 
   return (
     <div className="py-24 max-w-screen-2xl mx-auto flex flex-col md:flex-row px-4 2xl:px-0 gap-8">
-      <div className="basis-1/2 bg-white rounded-lg p-4">
+      <AddUpdate
+        isOpen={isOpen}
+        initialValues={productData}
+        isUpdating={true}
+        onClose={closeDialog}
+        onSubmit={handleFormSubmit}
+      />
+      <div className="basis-1/2 bg-white rounded-lg flex justify-center items-center">
         <img
-          className="max-h-[300px] sm:max-h-[400px] object-contain px-16 mx-auto"
+          className="w-[70vw] sm:h-[400px] h-auto object-contain "
           src={`${productData.image}`}
         />
       </div>
       <div className="basis-1/2 flex items-center">
         <div className="flex flex-col gap-4 my-auto ">
           <div className="flex flex-col gap-2">
-            <h3 className="capitalize text-lg font-bold text-slate-700">
-              {category}
-            </h3>
+            <div className="group flex justify-between w-full">
+              <h3 className="capitalize text-lg font-bold text-slate-700">
+                {category}
+              </h3>
+              <button onClick={() => setIsOpen(true)}>
+                <Pencil className="w-7 h-7 p-1 rounded-lg flex hover:bg-gray-500 hover:stroke-white bg-white stroke-black transition-all duration-150" />
+              </button>
+            </div>
             <h2 className="text-2xl font-bold">{productData.title}</h2>
           </div>
           <div>
