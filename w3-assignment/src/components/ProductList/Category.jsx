@@ -9,6 +9,7 @@ import axios from "axios";
 import { addToCartService } from "../../services/cartservice";
 
 const Category = ({ title, products: initialProducts, categoryId }) => {
+  const addToCart = useCart((state) => state.addToCart);
   const [products, setProducts] = useState(initialProducts);
   const [isOpen, setIsOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -74,7 +75,7 @@ const Category = ({ title, products: initialProducts, categoryId }) => {
     addToCart(product, 1);
     await addToCartService(product);
   };
-  const addToCart = useCart((state) => state.addToCart);
+
   return (
     <div>
       <div className="flex flex-col gap-4">
