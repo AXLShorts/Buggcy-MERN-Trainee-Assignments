@@ -1,6 +1,7 @@
 import useProducts from "../../hooks/useProducts";
 import Category from "./Category";
 import groupByCategory from "../../utils/groupByCategory";
+import "ldrs/trefoil";
 
 const ProductList = ({ categoryLink }) => {
   const { products, isLoading, isError } = useProducts({ single: false });
