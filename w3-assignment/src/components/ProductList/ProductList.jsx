@@ -9,6 +9,7 @@ const ProductList = ({ categoryLink }) => {
   if (isLoading)
     return (
       <div className="py-10">
+        Loading
         <l-trefoil
           size="40"
           stroke="4"
