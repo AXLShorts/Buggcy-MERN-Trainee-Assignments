@@ -1,6 +1,7 @@
 import useCart from "../../hooks/useCart";
 import { Link } from "react-router-dom";
 import { Trash } from "lucide-react";
+import axios from "axios";
 
 const Cart = () => {
   const cart = useCart((state) => state.cart);
@@ -9,26 +10,48 @@ const Cart = () => {
 
   const cartItemsLength = cart.length;
 
-  const handleIncrement = (productId, currentQuantity) => {
+  const handleIncrement = async (productId, currentQuantity) => {
     if (currentQuantity < 99) {
       updateQuantity(productId, currentQuantity + 1);
+      await axios.put("https://fakestoreapi.com/carts/5", {
+        userId: 5,
+        date: "2020-02-03",
+        products: [{ productId: productId, quantity: currentQuantity + 1 }],
+      });
     }
   };
-  const handleDecrement = (productId, currentQuantity) => {
+  const handleDecrement = async (productId, currentQuantity) => {
     if (currentQuantity > 1) {
       updateQuantity(productId, currentQuantity - 1);
+      await axios.put("https://fakestoreapi.com/carts/5", {
+        userId: 5,
+        date: "2020-02-03",
+        products: [{ productId: productId, quantity: currentQuantity - 1 }],
+      });
     } else {
-      removeFromCart(productId);
+      handleDelete(productId);
     }
   };
-  const handleChange = (productId, e) => {
+  const handleChange = async (productId, e) => {
     const quantity = parseInt(e.target.value, 10);
 
     if (!isNaN(quantity) && quantity > 0 && quantity < 100) {
       updateQuantity(productId, quantity);
+      await axios.put("https://fakestoreapi.com/carts/5", {
+        userId: 5,
+        date: "2020-02-03",
+        products: [{ productId: productId, quantity: quantity }],
+      });
     } else if (quantity === 0) {
-      removeFromCart(productId);
+      handleDelete(productId);
     }
+  };
+
+  const handleDelete = async (productId) => {
+    removeFromCart(productId);
+    await axios.put("https://fakestoreapi.com/carts/5", {
+      products: cart.filter((item) => item.product.id !== productId),
+    });
   };
 
   return (
@@ -113,7 +136,7 @@ const Cart = () => {
                       <button
                         className="w-fit flex gap-1 text-red-500 mt-auto mb-2"
                         onClick={() => {
-                          removeFromCart(item.product.id);
+                          handleDelete(item.product.id);
                         }}
                       >
                         <Trash stroke="#EF4444" className="w-5 h-5" />

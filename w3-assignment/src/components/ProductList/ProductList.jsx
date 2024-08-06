@@ -1,15 +1,16 @@
 import useProducts from "../../hooks/useProducts";
 import Category from "./Category";
 import groupByCategory from "../../utils/groupByCategory";
-import "ldrs/trefoil";
+import { trefoil } from "ldrs";
 
 const ProductList = ({ categoryLink }) => {
   const { products, isLoading, isError } = useProducts({ single: false });
 
+  trefoil.register();
+
   if (isLoading)
     return (
       <div className="py-10">
-        Loading
         <l-trefoil
           size="40"
           stroke="4"

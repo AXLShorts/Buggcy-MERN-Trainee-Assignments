@@ -20,7 +20,7 @@ const Nav = () => {
         <Link to="/cart" className="relative">
           <img src="/assets/cart.webp" alt="" className="w-12 h-12" />
           <div className="absolute px-1 bg-[#ff0000] text-white rounded-full -bottom-1 -right-1 flex justify-center items-center">
-            {totalQuantity}
+            {cartItems == [] ? 0 : totalQuantity}
           </div>
         </Link>
       </div>

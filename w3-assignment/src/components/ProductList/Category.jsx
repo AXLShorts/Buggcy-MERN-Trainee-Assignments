@@ -6,6 +6,7 @@ import { Pencil, Trash } from "lucide-react";
 import { useState } from "react";
 import AddUpdate from "../Global/AddUpdate";
 import axios from "axios";
+import { addToCartService } from "../../services/cartservice";
 
 const Category = ({ title, products: initialProducts, categoryId }) => {
   const [products, setProducts] = useState(initialProducts);
@@ -69,8 +70,11 @@ const Category = ({ title, products: initialProducts, categoryId }) => {
     );
   };
 
+  const handleAddToCart = async (product) => {
+    addToCart(product, 1);
+    await addToCartService(product);
+  };
   const addToCart = useCart((state) => state.addToCart);
-
   return (
     <div>
       <div className="flex flex-col gap-4">
@@ -126,7 +130,7 @@ const Category = ({ title, products: initialProducts, categoryId }) => {
                 </p>
                 <button
                   onClick={() => {
-                    addToCart(product, 1);
+                    handleAddToCart(product);
                   }}
                   className="bg-[#160d0f] relative text-white p-2 hover:text-lg hover:p-1.5"
                 >

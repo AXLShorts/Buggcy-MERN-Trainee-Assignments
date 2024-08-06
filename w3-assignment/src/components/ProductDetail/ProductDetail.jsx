@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Pencil } from "lucide-react";
 import AddUpdate from "../Global/AddUpdate";
 import axios from "axios";
+import { addToCartService } from "../../services/cartservice";
 
 const ProductDetail = ({ productData: singleProduct }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,11 @@ const ProductDetail = ({ productData: singleProduct }) => {
     );
     const updatedProduct = { ...response.data, rating: productData.rating };
     setProductData(updatedProduct);
+  };
+
+  const handleAddToCart = async (product) => {
+    addToCart(product, quantity);
+    await addToCartService(product, quantity);
   };
 
   return (
@@ -105,7 +111,7 @@ const ProductDetail = ({ productData: singleProduct }) => {
             </div>
             <button
               onClick={() => {
-                addToCart(productData, quantity);
+                handleAddToCart(productData);
               }}
               className="w-fit px-4 py-2 bg-[#160d0f] text-white rounded-lg"
             >
