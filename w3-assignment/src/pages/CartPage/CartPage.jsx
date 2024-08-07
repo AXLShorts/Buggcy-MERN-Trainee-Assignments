@@ -17,7 +17,7 @@ const CartPage = () => {
           </div>
         ) : (
           <div>
-            <div className="text-center text-4xl font-bold p-32">
+            <div className="text-center text-xl  sm:text-4xl font-bold p-16 sm:p-32">
               Your Cart is Empty
             </div>
             <ProductList categoryLink={false} />

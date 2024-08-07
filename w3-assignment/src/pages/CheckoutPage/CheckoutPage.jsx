@@ -16,12 +16,12 @@ const CheckoutPage = () => {
     <header className="pt-24 max-w-screen-2xl w-full mx-auto ">
       {cart.length === 0 && !checkoutDone ? (
         <div className="text-center p-32 flex flex-col gap-4">
-          <p className="font-bold text-4xl">Your Cart is Empty</p>
+          <p className="font-bold text-xl  sm:text-4xl">Your Cart is Empty</p>
           <Link
             to="/"
             className="no-underline text-blue-500 flex items-center mx-auto"
           >
-            &larr; Continue Shopping
+            <p className="hidden sm:flex">&larr;</p> Continue Shopping
           </Link>
         </div>
       ) : checkoutDone ? (
