@@ -1,7 +1,7 @@
 import Shipping from "../../components/Cart/Shipping";
 import Cart from "../../components/Cart/Cart";
 import useCart from "../../hooks/useCart";
-import ProductList from "../../components/ProductList/ProductList";
+import { Link } from "react-router-dom";
 
 const CartPage = () => {
   const cart = useCart((state) => state.cart);
@@ -17,10 +17,17 @@ const CartPage = () => {
           </div>
         ) : (
           <div>
-            <div className="text-center text-xl  sm:text-4xl font-bold p-16 sm:p-32">
-              Your Cart is Empty
+            <div className="text-center  p-16 sm:p-32 flex flex-col gap-8">
+              <p className=" font-bold text-xl sm:text-4xl">
+                Your Cart is Empty{" "}
+              </p>
+              <Link
+                to="/"
+                className="no-underline text-blue-500 flex mx-auto gap-2"
+              >
+                <p className="hidden sm:flex">&larr;</p> Continue Shopping
+              </Link>
             </div>
-            <ProductList categoryLink={false} />
           </div>
         )}
       </div>
