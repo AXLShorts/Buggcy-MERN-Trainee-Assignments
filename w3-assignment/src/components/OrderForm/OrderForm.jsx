@@ -3,12 +3,21 @@ import { useFormik } from "formik";
 import { initialValues } from "./initialValues";
 import { validationSchema } from "./formValidation";
 import "ldrs/trefoil";
+import useCart from "../../hooks/useCart";
 
-const OrderForm = () => {
+const OrderForm = ({ checkOutStatus }) => {
+  const cart = useCart((state) => state.cart);
+  const clearCart = useCart((state) => state.clearCart);
+
   const [paymentMethod, setPaymentMethod] = useState("COD");
 
   const handleFormSubmit = (values) => {
     console.log("Form values:", values);
+  };
+
+  const handlePaymentMethodChange = (e) => {
+    formik.handleChange(e);
+    setPaymentMethod(e.target.value);
   };
 
   const formik = useFormik({
@@ -107,10 +116,7 @@ const OrderForm = () => {
                 name="paymentMethod"
                 value="COD"
                 checked={formik.values.paymentMethod === "COD"}
-                onChange={(e) => {
-                  formik.handleChange(e);
-                  setPaymentMethod(e.target.value);
-                }}
+                onChange={handlePaymentMethodChange}
                 className="form-radio"
               />
               <span className="ml-2">Cash on Delivery</span>
@@ -121,10 +127,7 @@ const OrderForm = () => {
                 name="paymentMethod"
                 value="CreditCard"
                 checked={formik.values.paymentMethod === "CreditCard"}
-                onChange={(e) => {
-                  formik.handleChange(e);
-                  setPaymentMethod(e.target.value);
-                }}
+                onChange={handlePaymentMethodChange}
                 className="form-radio"
               />
               <span className="ml-2">Credit Card</span>
@@ -196,12 +199,25 @@ const OrderForm = () => {
           </>
         )}
         <div>
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-[#0e081b] text-white rounded-md"
-          >
-            Place Order
-          </button>
+          {cart.length === 0 ? (
+            <button
+              type="button"
+              className="bg-gray-300 text-black px-4 p-2 rounded-md cursor-not-allowed pointer-events-none text-sm"
+            >
+              Cart is empty
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="bg-[#0e081b] text-white px-4 py-2 rounded-md"
+              onClick={() => {
+                clearCart();
+                checkOutStatus(true);
+              }}
+            >
+              Place Order
+            </button>
+          )}
         </div>
       </form>
     </div>
