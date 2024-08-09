@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProfile = exports.signin = exports.signup = void 0;
+exports.getAllUsers = exports.getProfile = exports.signin = exports.signup = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const prisma_1 = __importDefault(require("../prisma"));
 const jwt_1 = require("../utils/jwt");
@@ -60,3 +60,8 @@ exports.getProfile = getProfile;
 //   });
 //   res.json(user);
 // };
+const getAllUsers = async (req, res) => {
+    const users = await prisma_1.default.user.findMany();
+    res.json(users);
+};
+exports.getAllUsers = getAllUsers;

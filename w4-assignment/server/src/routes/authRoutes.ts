@@ -4,6 +4,7 @@ import {
   signin,
   getProfile,
   // updateProfile,
+  getAllUsers,
 } from "../controllers/authController";
 import {
   googleAuth,
@@ -18,6 +19,7 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/profile", authenticate, getProfile);
 // router.put("/profile", authenticate, updateProfile);
+router.get("/getallusers", getAllUsers);
 
 // Google OAuth routes
 router.get("/auth/google", googleAuth);
