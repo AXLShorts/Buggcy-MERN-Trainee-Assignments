@@ -11,7 +11,7 @@ const router = express_1.default.Router();
 router.post("/signup", authController_1.signup);
 router.post("/signin", authController_1.signin);
 router.get("/profile", auth_1.authenticate, authController_1.getProfile);
-router.put("/profile", auth_1.authenticate, authController_1.updateProfile);
+// router.put("/profile", authenticate, updateProfile);
 // Google OAuth routes
 router.get("/auth/google", googleAuthController_1.googleAuth);
 router.get("/auth/google/callback", googleAuthController_1.googleAuthCallback, googleAuthController_1.googleAuthRedirect);

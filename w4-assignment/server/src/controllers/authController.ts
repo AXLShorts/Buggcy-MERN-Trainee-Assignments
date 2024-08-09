@@ -54,13 +54,13 @@ export const getProfile = async (req: Request, res: Response) => {
   res.json(req.user);
 };
 
-export const updateProfile = async (req: Request, res: Response) => {
-  const { name, age, gender, profilePicture } = req.body;
+// export const updateProfile = async (req: Request, res: Response) => {
+//   const { name, age, gender, profilePicture } = req.body;
 
-  const user = await prisma.user.update({
-    where: { id: req.user?.id },
-    data: { name, age, gender, profilePicture },
-  });
+//   const user = await prisma.user.update({
+//     where: { id: req.user?.id },
+//     data: { name, age, gender, profilePicture },
+//   });
 
-  res.json(user);
-};
+//   res.json(user);
+// };

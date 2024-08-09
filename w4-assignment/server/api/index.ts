@@ -1,9 +1,9 @@
 import express from "express";
 import session from "express-session";
 import passport from "passport";
-import { apiLimiter } from "./middleware/rateLimiter";
-import authRoutes from "./routes/authRoutes";
-import "./utils/passport"; // Initialize passport
+import { apiLimiter } from "../src/middleware/rateLimiter";
+import authRoutes from "../src/routes/authRoutes";
+import "../src/utils/passport"; // Initialize passport
 
 const app = express();
 
