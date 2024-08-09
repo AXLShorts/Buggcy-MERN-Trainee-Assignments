@@ -21,6 +21,9 @@ app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 app.use(rateLimiter_1.apiLimiter); // Apply rate limiting middleware
 app.use("/api", authRoutes_1.default);
+app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
