@@ -50,7 +50,7 @@ const SignupForm = () => {
     };
     try {
       const response = await axios.post(
-        "https://backendauth-axlshorts-projects.vercel.app/api/signup",
+        "http://127.0.0.1:4000/api/signup",
         {
           email: formData.email,
           password: formData.password,

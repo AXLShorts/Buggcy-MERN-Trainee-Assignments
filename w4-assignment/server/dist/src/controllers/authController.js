@@ -34,16 +34,15 @@ const signup = async (req, res) => {
         const token = (0, jwt_1.generateToken)(user);
         res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Ensure this is true in production
-            sameSite: "none", // Allows cross-site cookie usage
-            maxAge: 60 * 60 * 24 * 7, // 7 days
+            secure: true,
+            sameSite: "strict",
+            maxAge: 60 * 60 * 24 * 7,
+            expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
             path: "/",
         }));
-        // Respond with the created user data
         res.status(201).json({ user });
     }
     catch (error) {
-        // Handle and respond with error
         res.status(400).json({ message: error.message });
     }
 };
@@ -51,26 +50,20 @@ exports.signup = signup;
 const signin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        // Find the user by email
         const user = await prisma_1.default.user.findUnique({ where: { email } });
-        // Check if user exists and password is correct
         if (!user || !(await bcryptjs_1.default.compare(password, user.password))) {
             return res.status(401).json({ message: "Invalid email or password" });
         }
-        // Generate JWT
         const token = (0, jwt_1.generateToken)(user);
-        // Set the JWT as an httpOnly cookie
         res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production", // Ensure this is true in production
-            sameSite: "none", // Allows cross-site cookie usage
-            maxAge: 60 * 60 * 24 * 7, // 7 days
+            secure: true,
+            sameSite: "strict",
+            maxAge: 60 * 60 * 24 * 7,
+            expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
             path: "/",
         }));
-        // Respond with the user data (excluding sensitive information)
-        res
-            .status(200)
-            .json({
+        res.status(200).json({
             user: {
                 id: user.id,
                 name: user.name,
@@ -82,7 +75,6 @@ const signin = async (req, res) => {
         });
     }
     catch (error) {
-        // Handle and respond with error
         res.status(500).json({ message: error.message });
     }
 };
@@ -92,10 +84,11 @@ const getProfile = async (req, res) => {
 };
 exports.getProfile = getProfile;
 // export const updateProfile = async (req: Request, res: Response) => {
-//   const { name, age, gender, profilePicture } = req.body;
+//   const { email, password, name, age, gender, profilePicture } = req.body;
+//  const hashedPassword = await bcrypt.hash(password, 10);
 //   const user = await prisma.user.update({
 //     where: { id: req.user?.id },
-//     data: { name, age, gender, profilePicture },
+//     data: { email, hashedPassword, name, age, gender, profilePicture },
 //   });
 //   res.json(user);
 // };
