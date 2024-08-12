@@ -8,8 +8,17 @@ const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
 const rateLimiter_1 = require("../src/middleware/rateLimiter");
 const authRoutes_1 = __importDefault(require("../src/routes/authRoutes"));
-require("../src/utils/passport"); // Initialize passport
+require("../src/utils/passport");
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
+app.use((0, cors_1.default)({
+    origin: [
+        "http://127.0.0.1:3000",
+        "http://localhost:3000",
+        "https://buggcy-mern-trainee-assignments.vercel.app",
+    ],
+    credentials: true,
+}));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, express_session_1.default)({

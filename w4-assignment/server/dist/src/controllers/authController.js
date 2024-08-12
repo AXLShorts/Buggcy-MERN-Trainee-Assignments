@@ -8,6 +8,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const prisma_1 = __importDefault(require("../prisma"));
 const jwt_1 = require("../utils/jwt");
 const zod_1 = require("zod");
+const cookie_1 = __importDefault(require("cookie"));
 const signupSchema = zod_1.z.object({
     email: zod_1.z.string().email(),
     password: zod_1.z.string().min(6),
@@ -31,21 +32,59 @@ const signup = async (req, res) => {
             },
         });
         const token = (0, jwt_1.generateToken)(user);
-        res.json({ token, user });
+        res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Ensure this is true in production
+            sameSite: "none", // Allows cross-site cookie usage
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+            path: "/",
+        }));
+        // Respond with the created user data
+        res.status(201).json({ user });
     }
     catch (error) {
+        // Handle and respond with error
         res.status(400).json({ message: error.message });
     }
 };
 exports.signup = signup;
 const signin = async (req, res) => {
-    const { email, password } = req.body;
-    const user = await prisma_1.default.user.findUnique({ where: { email } });
-    if (!user || !(await bcryptjs_1.default.compare(password, user.password))) {
-        return res.status(401).json({ message: "Invalid email or password" });
+    try {
+        const { email, password } = req.body;
+        // Find the user by email
+        const user = await prisma_1.default.user.findUnique({ where: { email } });
+        // Check if user exists and password is correct
+        if (!user || !(await bcryptjs_1.default.compare(password, user.password))) {
+            return res.status(401).json({ message: "Invalid email or password" });
+        }
+        // Generate JWT
+        const token = (0, jwt_1.generateToken)(user);
+        // Set the JWT as an httpOnly cookie
+        res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Ensure this is true in production
+            sameSite: "none", // Allows cross-site cookie usage
+            maxAge: 60 * 60 * 24 * 7, // 7 days
+            path: "/",
+        }));
+        // Respond with the user data (excluding sensitive information)
+        res
+            .status(200)
+            .json({
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                profilePicture: user.profilePicture,
+                age: user.age,
+                gender: user.gender,
+            },
+        });
     }
-    const token = (0, jwt_1.generateToken)(user);
-    res.json({ token, user });
+    catch (error) {
+        // Handle and respond with error
+        res.status(500).json({ message: error.message });
+    }
 };
 exports.signin = signin;
 const getProfile = async (req, res) => {

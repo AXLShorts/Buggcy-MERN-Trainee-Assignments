@@ -8,16 +8,16 @@ import cors from "cors";
 
 const app = express();
 
-app.options("*", cors());
-
-const corsOptions = {
-  origin: "https://buggcy-mern-trainee-assignments.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  accessControlAllowOrigin: true,
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: [
+      "http://127.0.0.1:3000",
+      "http://localhost:3000",
+      "https://buggcy-mern-trainee-assignments.vercel.app",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

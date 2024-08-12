@@ -42,15 +42,15 @@ const SignInForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     try {
-      await axios.post(
-        "https://backendauth-axlshorts-projects.vercel.app/api/signin",
+      const response = await axios.post(
+        "http://localhost:4000/api/signin",
         { email: values.email, password: values.password },
         {
           withCredentials: true, // Include cookies in the request
         }
       );
 
-      // Redirect to the profile or dashboard page after successful sign-in
+      console.log(response);
       redirect("/profile");
     } catch (error: any) {
       console.error(error);
