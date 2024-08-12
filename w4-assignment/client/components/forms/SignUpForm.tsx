@@ -1,5 +1,7 @@
 "use client";
 
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +30,7 @@ import { z } from "zod";
 import { signUpFormSchema as formSchema } from "../validation/signUpFormValidation";
 
 const SignupForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,12 +43,32 @@ const SignupForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const formData = {
       ...values,
       age: values.age ? parseInt(values.age, 10) : undefined,
     };
-    console.log(formData);
+    try {
+      const response = await axios.post(
+        "https://backendauth-axlshorts-projects.vercel.app/api/signup",
+        {
+          email: formData.email,
+          password: formData.password,
+          name: formData.name,
+          age: formData.age,
+          gender: formData.gender,
+          profilePicture: "ABC",
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+      router.push("/profile");
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (
