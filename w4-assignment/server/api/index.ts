@@ -8,12 +8,13 @@ import cors from "cors";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your frontend's origin
+  methods: ["GET", "POST", "PUT", "DELETE"], // Add any other methods you use
+  credentials: true, // Allow cookies and authorization headers
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
