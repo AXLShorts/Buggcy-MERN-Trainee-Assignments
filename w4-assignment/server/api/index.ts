@@ -8,6 +8,8 @@ import cors from "cors";
 
 const app = express();
 
+app.options("*", cors());
+
 const corsOptions = {
   origin: "https://buggcy-mern-trainee-assignments.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
