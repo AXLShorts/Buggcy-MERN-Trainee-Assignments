@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://axlfrontendauth.vercel.app.vercel.app",
+    origin: "https://axlfrontendauth.vercel.app",
     credentials: true,
   })
 );
