@@ -9,7 +9,7 @@ const page = () => {
         <div>
           <h2 className="text-2xl font-bold">Sign In</h2>
           <p>
-            Don't Have an Account Yet?{" "}
+            Don&#39t Have an Account Yet?{" "}
             <Link className="underline" href="/signup">
               Sign Up
             </Link>
