@@ -9,12 +9,7 @@ import cors from "cors";
 const app = express();
 
 const corsOptions = {
-  origin: [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "http://localhost:3000/signin",
-    "http://127.0.0.1:3000/signin",
-  ],
+  origin: "https://buggcy-mern-trainee-assignments.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
   accessControlAllowOrigin: true,
