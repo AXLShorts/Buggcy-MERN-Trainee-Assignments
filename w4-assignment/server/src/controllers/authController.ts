@@ -37,7 +37,7 @@ export const signup = async (req: Request, res: Response) => {
       cookie.serialize("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
         expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
         path: "/",
@@ -67,7 +67,7 @@ export const signin = async (req: Request, res: Response) => {
       cookie.serialize("token", token, {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
         expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
         path: "/",
