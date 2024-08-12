@@ -43,7 +43,7 @@ const SignInForm = () => {
     console.log(values);
     try {
       await axios.post(
-        "https://backendauth-axlshorts-projects.vercel.app/api/getallusers",
+        "https://backendauth-axlshorts-projects.vercel.app/api/signin",
         { email: values.email, password: values.password },
         {
           withCredentials: true, // Include cookies in the request
