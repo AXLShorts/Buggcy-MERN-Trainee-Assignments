@@ -9,12 +9,15 @@ import cors from "cors";
 const app = express();
 
 const corsOptions = {
-  origin: "*", // Replace with your frontend's origin
+  origin: [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "http://localhost:3000/signin",
+    "http://127.0.0.1:3000/signin",
+  ], // Replace with your frontend's origin
   methods: ["GET", "POST", "PUT", "DELETE"], // Add any other methods you use
   credentials: true, // Allow cookies and authorization headers
 };
-
-app.options("*", cors(corsOptions));
 
 app.use(cors(corsOptions));
 
