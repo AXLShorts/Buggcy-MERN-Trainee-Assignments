@@ -35,7 +35,6 @@ export const signup = async (req: Request, res: Response) => {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("token", token, {
-        httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
@@ -64,7 +63,6 @@ export const signin = async (req: Request, res: Response) => {
     res.setHeader(
       "Set-Cookie",
       cookie.serialize("token", token, {
-        httpOnly: false,
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
