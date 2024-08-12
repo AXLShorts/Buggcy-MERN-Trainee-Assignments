@@ -15,6 +15,7 @@ app.use((0, cors_1.default)({
     origin: "https://axlfrontendauth.vercel.app",
     credentials: true,
 }));
+// a
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, express_session_1.default)({

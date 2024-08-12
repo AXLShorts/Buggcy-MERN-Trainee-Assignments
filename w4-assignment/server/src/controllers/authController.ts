@@ -70,7 +70,6 @@ export const signin = async (req: Request, res: Response) => {
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
         expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
-        domain: ".vercel.app",
         path: "/",
       })
     );
