@@ -18,11 +18,12 @@ import type { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { signInFormSchema as formSchema } from "../validation/signInFormValidation";
 
 const SignInForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,15 +44,16 @@ const SignInForm = () => {
     console.log(values);
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/signin",
+        "https://backendauth-axlshorts-projects.vercel.app/api/signin",
         { email: values.email, password: values.password },
         {
           withCredentials: true, // Include cookies in the request
         }
       );
 
-      console.log(response);
-      redirect("/profile");
+      console.log(response.data);
+      router.push("/profile");
+      console.log("Redirected");
     } catch (error: any) {
       console.error(error);
     }
