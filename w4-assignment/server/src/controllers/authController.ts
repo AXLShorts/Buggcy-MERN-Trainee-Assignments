@@ -71,26 +71,24 @@ export const signin = async (req: Request, res: Response) => {
       "Set-Cookie",
       cookie.serialize("token", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Ensure this is true in production
-        sameSite: "none", // Allows cross-site cookie usage
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "none",
+        maxAge: 60 * 60 * 24 * 7,
         path: "/",
       })
     );
 
     // Respond with the user data (excluding sensitive information)
-    res
-      .status(200)
-      .json({
-        user: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          profilePicture: user.profilePicture,
-          age: user.age,
-          gender: user.gender,
-        },
-      });
+    res.status(200).json({
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        profilePicture: user.profilePicture,
+        age: user.age,
+        gender: user.gender,
+      },
+    });
   } catch (error: any) {
     // Handle and respond with error
     res.status(500).json({ message: error.message });

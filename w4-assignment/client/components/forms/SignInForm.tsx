@@ -47,13 +47,12 @@ const SignInForm = () => {
         "https://backendauth-axlshorts-projects.vercel.app/api/signin",
         { email: values.email, password: values.password },
         {
-          withCredentials: true, // Include cookies in the request
+          withCredentials: true,
         }
       );
 
       console.log(response.data);
       router.push("/profile");
-      console.log("Redirected");
     } catch (error: any) {
       console.error(error);
     }
