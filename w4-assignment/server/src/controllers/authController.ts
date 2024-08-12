@@ -39,6 +39,7 @@ export const signup = async (req: Request, res: Response) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
+        expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
         path: "/",
       })
     );
@@ -68,6 +69,7 @@ export const signin = async (req: Request, res: Response) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         maxAge: 60 * 60 * 24 * 7,
+        expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
         path: "/",
       })
     );
