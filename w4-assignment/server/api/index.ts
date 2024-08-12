@@ -4,22 +4,8 @@ import passport from "passport";
 import { apiLimiter } from "../src/middleware/rateLimiter";
 import authRoutes from "../src/routes/authRoutes";
 import "../src/utils/passport";
-import cors from "cors";
 
 const app = express();
-
-const corsOptions = {
-  origin: [
-    "http://127.0.0.1:3000",
-    "http://localhost:3000",
-    "http://localhost:3000/signin",
-    "http://127.0.0.1:3000/signin",
-  ], // Replace with your frontend's origin
-  methods: ["GET", "POST", "PUT", "DELETE"], // Add any other methods you use
-  credentials: true, // Allow cookies and authorization headers
-};
-
-app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
