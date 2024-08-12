@@ -13,10 +13,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFormState } from "react-hook-form";
 import type { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
+import axios from "axios";
+import { redirect } from "next/navigation";
 
 import { signInFormSchema as formSchema } from "../validation/signInFormValidation";
 
@@ -30,8 +32,29 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  // const {
+  //   formState: { isDirty, dirtyFields },
+  // } = form;
+
+  // console.log(isDirty);
+  // console.log(dirtyFields);
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    try {
+      await axios.post(
+        "https://backendauth-axlshorts-projects.vercel.app/api/getallusers",
+        { email: values.email, password: values.password },
+        {
+          withCredentials: true, // Include cookies in the request
+        }
+      );
+
+      // Redirect to the profile or dashboard page after successful sign-in
+      redirect("/profile");
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   return (

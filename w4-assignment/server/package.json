@@ -33,9 +33,11 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/cookie": "^0.6.0",
     "@types/cors": "^2.8.17",
     "@types/passport": "^1.0.16",
     "@types/passport-google-oauth20": "^2.0.16",
+    "cookie": "^0.6.0",
     "cors": "^2.8.5"
   }
 }

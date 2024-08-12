@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import prisma from "../prisma";
 import { generateToken } from "../utils/jwt";
 import { z } from "zod";
+import cookie from "cookie";
 
 const signupSchema = z.object({
   email: z.string().email(),
@@ -31,23 +32,69 @@ export const signup = async (req: Request, res: Response) => {
     });
 
     const token = generateToken(user);
-    res.json({ token, user });
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Ensure this is true in production
+        sameSite: "none", // Allows cross-site cookie usage
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+        path: "/",
+      })
+    );
+
+    // Respond with the created user data
+    res.status(201).json({ user });
   } catch (error: any) {
+    // Handle and respond with error
     res.status(400).json({ message: error.message });
   }
 };
 
 export const signin = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await prisma.user.findUnique({ where: { email } });
+    // Find the user by email
+    const user = await prisma.user.findUnique({ where: { email } });
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ message: "Invalid email or password" });
+    // Check if user exists and password is correct
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Generate JWT
+    const token = generateToken(user);
+
+    // Set the JWT as an httpOnly cookie
+    res.setHeader(
+      "Set-Cookie",
+      cookie.serialize("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Ensure this is true in production
+        sameSite: "none", // Allows cross-site cookie usage
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+        path: "/",
+      })
+    );
+
+    // Respond with the user data (excluding sensitive information)
+    res
+      .status(200)
+      .json({
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          profilePicture: user.profilePicture,
+          age: user.age,
+          gender: user.gender,
+        },
+      });
+  } catch (error: any) {
+    // Handle and respond with error
+    res.status(500).json({ message: error.message });
   }
-
-  const token = generateToken(user);
-  res.json({ token, user });
 };
 
 export const getProfile = async (req: Request, res: Response) => {
