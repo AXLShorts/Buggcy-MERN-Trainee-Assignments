@@ -11,7 +11,6 @@ const app = express();
 app.use(
   cors({
     origin: "https://buggcy-mern-trainee-assignments.vercel.app",
-
     credentials: true,
   })
 );
