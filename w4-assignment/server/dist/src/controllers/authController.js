@@ -61,6 +61,9 @@ const signin = async (req, res) => {
             sameSite: "strict",
             maxAge: 60 * 60 * 24 * 7,
             expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
+            // domain ending with .vercel.app
+            // Like *.vercel.app
+            domain: ".vercel.app",
             path: "/",
         }));
         res.status(200).json({
