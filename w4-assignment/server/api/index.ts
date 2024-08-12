@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://buggcy-mern-trainee-assignments.vercel.app",
+    origin: "https://axlfrontendauth.vercel.app.vercel.app",
     credentials: true,
   })
 );

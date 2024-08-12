@@ -12,7 +12,7 @@ require("../src/utils/passport");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "https://buggcy-mern-trainee-assignments.vercel.app",
+    origin: "https://axlfrontendauth.vercel.app.vercel.app",
     credentials: true,
 }));
 app.use(express_1.default.json());
