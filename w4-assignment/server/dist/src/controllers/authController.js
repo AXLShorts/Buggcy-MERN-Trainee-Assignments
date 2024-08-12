@@ -35,7 +35,7 @@ const signup = async (req, res) => {
         res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "strict",
+            sameSite: "none",
             maxAge: 60 * 60 * 24 * 7,
             expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
             path: "/",
@@ -58,7 +58,7 @@ const signin = async (req, res) => {
         res.setHeader("Set-Cookie", cookie_1.default.serialize("token", token, {
             httpOnly: true,
             secure: true,
-            sameSite: "strict",
+            sameSite: "none",
             maxAge: 60 * 60 * 24 * 7,
             expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
             path: "/",
