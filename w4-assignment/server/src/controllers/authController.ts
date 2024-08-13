@@ -44,6 +44,7 @@ export const signup = async (req: Request, res: Response) => {
       })
     );
 
+    // asd
     res.status(201).json({ user });
   } catch (error: any) {
     res.status(400).json({ message: error.message });
