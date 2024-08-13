@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import ProfileForm from "@/components/forms/ProfileForm";
 
 const Page = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<{ name: string } | null>(null);
   const { isAuthenticated, loading } = useAuth();
   const router = useRouter();
 
