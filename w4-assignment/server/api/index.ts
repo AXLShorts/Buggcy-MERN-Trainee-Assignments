@@ -10,7 +10,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://axlfrontendauth.vercel.app",
+    origin: [
+      "https://axlfrontendauth.vercel.app",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+    ],
     credentials: true,
   })
 );
@@ -41,5 +45,5 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port http://127.0.0.1:${PORT}`);
 });

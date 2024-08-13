@@ -15,15 +15,17 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFormState } from "react-hook-form";
 import type { Control, FieldPath } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-
+import { useAuth } from "@/context/AuthContext";
 import { signInFormSchema as formSchema } from "../validation/signInFormValidation";
 
 const SignInForm = () => {
   const router = useRouter();
+  const { login } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,28 +35,35 @@ const SignInForm = () => {
     },
   });
 
-  // const {
-  //   formState: { isDirty, dirtyFields },
-  // } = form;
+  const {
+    formState: { isDirty, dirtyFields },
+  } = form;
 
-  // console.log(isDirty);
-  // console.log(dirtyFields);
+  console.log(isDirty);
+  console.log(dirtyFields);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
     console.log(values);
     try {
       const response = await axios.post(
-        "https://axlbackendauth.vercel.app/api/signin",
+        "http://127.0.0.1:4000/api/signin",
         { email: values.email, password: values.password },
         {
           withCredentials: true,
         }
       );
 
-      console.log(response.data);
-      router.push("/profile");
+      // Only navigate to the profile page if the sign-in is successful
+      if (response.status === 200) {
+        login(response);
+        router.push("/profile");
+      }
     } catch (error: any) {
       console.error(error);
+      // Optionally handle error (e.g., show a message to the user)
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -90,7 +99,7 @@ const SignInForm = () => {
           </button>
         </div>
         <Button className="w-full" type="submit">
-          Sign In
+          {loading ? "Signing In..." : "Sign In"}
         </Button>
       </form>
     </Form>

@@ -7,7 +7,7 @@
     "build": "tsc && prisma generate",
     "start": "node dist/api/index.js",
     "postinstall": "prisma generate && prisma migrate deploy",
-    "test": "npx tsc && npm run build"
+    "test": "npx tsc && npm run build && npm run start"
   },
   "keywords": [],
   "author": "",

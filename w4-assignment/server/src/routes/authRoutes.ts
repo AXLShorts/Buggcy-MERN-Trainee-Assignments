@@ -3,8 +3,9 @@ import {
   signup,
   signin,
   getProfile,
-  // updateProfile,
+  updateProfile,
   getAllUsers,
+  logout,
 } from "../controllers/authController";
 import {
   googleAuth,
@@ -18,8 +19,9 @@ const router = express.Router();
 router.post("/signup", signup);
 router.post("/signin", signin);
 router.get("/profile", authenticate, getProfile);
-// router.put("/profile", authenticate, updateProfile);
+router.post("/profile", authenticate, updateProfile);
 router.get("/getallusers", getAllUsers);
+router.post("/logout", logout);
 
 // Google OAuth routes
 router.get("/auth/google", googleAuth);

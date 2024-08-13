@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticate = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const jwt_1 = require("../utils/jwt");
+const cookie_1 = __importDefault(require("cookie"));
 const authenticate = async (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1];
+    const cookies = req.headers.cookie ? cookie_1.default.parse(req.headers.cookie) : {};
+    const token = cookies.token;
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" });
     }

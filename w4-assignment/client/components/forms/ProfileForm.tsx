@@ -26,36 +26,67 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
-import { useAuth } from "@/context/AuthContext";
-import { signUpFormSchema as formSchema } from "../validation/signUpFormValidation";
+import { useToast } from "@/components/ui/use-toast";
+import { updateFormSchema as formSchema } from "../validation/updateFormValidation";
 
-const SignupForm = () => {
+const ProfileForm = ({ user }: { user: any }) => {
+  const { toast } = useToast();
+  const handleLogout = async () => {
+    console.log("Logged out 1");
+    try {
+      await axios
+        .post("http://127.0.0.1:4000/api/logout", {
+          withCredentials: true,
+        })
+        .then(() => {
+          console.log("Logged out");
+          router.push("/signin");
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const router = useRouter();
-  const { login } = useAuth();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
+      name: user.name,
+      email: user.email,
+      oldPassword: "",
+      newPassword: "",
       confirmPassword: "",
-      age: undefined,
-      gender: "",
+      age: user.age,
+      gender: user.gender,
     },
   });
 
+  // Extract isDirty from formState
+  const {
+    formState: { isDirty, dirtyFields },
+  } = form;
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log(values);
+    if (values.oldPassword === values.newPassword) {
+      toast({
+        variant: "destructive",
+        title: "New Password Cannot Be Same As Old Password",
+      });
+      return;
+    }
     const formData = {
       ...values,
       age: values.age ? parseInt(values.age, 10) : undefined,
     };
+    console.log("formData", formData);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:4000/api/signup",
+        "http://127.0.0.1:4000/api/profile",
         {
-          email: formData.email,
-          password: formData.password,
           name: formData.name,
+          email: formData.email,
+          oldPassword: formData.oldPassword,
+          newPassword: formData.newPassword,
           age: formData.age,
           gender: formData.gender,
           profilePicture: "ABC",
@@ -64,10 +95,9 @@ const SignupForm = () => {
           withCredentials: true,
         }
       );
-      if (response.status === 201) {
-        login(response);
-        router.push("/profile");
-      }
+
+      console.log(response.data);
+      router.push("/profile");
     } catch (error: any) {
       console.error(error);
     }
@@ -77,63 +107,87 @@ const SignupForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-4 text-left w-full"
+        className="space-y-4 text-left w-full flex flex-col"
+        autoComplete="off"
       >
-        <SignupFormField
-          name="name"
-          label="Name"
-          placeholder="Name"
-          description="At least 3 characters."
-          formControl={form.control}
-        />
-        <SignupFormField
-          name="email"
-          label="Email"
-          placeholder="Email"
-          inputType="email"
-          formControl={form.control}
-        />
-        <SignupFormField
-          name="password"
-          label="Password"
-          placeholder="Password"
+        <div className="flex gap-4">
+          <ProfileFormField
+            name="name"
+            label="Name"
+            placeholder="Name"
+            description="At least 3 characters."
+            formControl={form.control}
+          />
+          <ProfileFormField
+            name="email"
+            label="Email"
+            placeholder="Email"
+            inputType="email"
+            formControl={form.control}
+          />
+        </div>
+
+        <ProfileFormField
+          name="oldPassword"
+          label="Old Password"
+          placeholder="Old Password"
           description="At least 8 characters."
           inputType="password"
           formControl={form.control}
         />
-        <SignupFormField
-          name="confirmPassword"
-          label="Confirm Password"
-          placeholder="Confirm Password"
-          description="Must match the password."
+        <ProfileFormField
+          name="newPassword"
+          label="New Password"
+          placeholder="New Password"
+          description="At least 8 characters."
           inputType="password"
           formControl={form.control}
         />
-        <SignupFormField
-          name="age"
-          label="Age"
-          placeholder="Age"
-          description="Must be at least 18 years old."
+        <ProfileFormField
+          name="confirmPassword"
+          label="Confirm Password"
+          placeholder="Confirm Password"
+          description="Must match the new password."
+          inputType="password"
           formControl={form.control}
-          inputType="number"
         />
-        <SignupFormSelect
-          name="gender"
-          label="Gender"
-          placeholder="Select Gender"
-          formControl={form.control}
-          options={[
-            { value: "male", label: "Male" },
-            { value: "female", label: "Female" },
-          ]}
-        />
-        <Button type="submit">Signup</Button>
+
+        <div className="flex gap-4">
+          <div className="w-full">
+            <ProfileFormField
+              name="age"
+              label="Age"
+              placeholder="Age"
+              description="Must be at least 18 years old."
+              formControl={form.control}
+              inputType="number"
+            />
+          </div>
+
+          <div className="w-full">
+            <ProfileFormSelect
+              name="gender"
+              label="Gender"
+              placeholder="Select Gender"
+              formControl={form.control}
+              options={[
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+              ]}
+            />
+          </div>
+        </div>
+
+        <Button type="submit" disabled={!isDirty}>
+          Update
+        </Button>
+        <Button onClick={handleLogout}>Logout</Button>
       </form>
     </Form>
   );
 };
 
-interface SignupFormFieldProps {
+interface ProfileFormFieldProps {
   name: FieldPath<z.infer<typeof formSchema>>;
   label: string;
   placeholder: string;
@@ -142,16 +196,7 @@ interface SignupFormFieldProps {
   formControl: Control<z.infer<typeof formSchema>, any>;
 }
 
-interface SignupFormSelectProps {
-  name: FieldPath<z.infer<typeof formSchema>>;
-  label: string;
-  placeholder: string;
-  description?: string;
-  formControl: Control<z.infer<typeof formSchema>, any>;
-  options: { value: string; label: string }[];
-}
-
-const SignupFormField: React.FC<SignupFormFieldProps> = ({
+const ProfileFormField: React.FC<ProfileFormFieldProps> = ({
   name,
   label,
   placeholder,
@@ -186,7 +231,16 @@ const SignupFormField: React.FC<SignupFormFieldProps> = ({
   );
 };
 
-const SignupFormSelect: React.FC<SignupFormSelectProps> = ({
+interface ProfileFormSelectProps {
+  name: FieldPath<z.infer<typeof formSchema>>;
+  label: string;
+  placeholder: string;
+  description?: string;
+  formControl: Control<z.infer<typeof formSchema>, any>;
+  options: { value: string; label: string }[];
+}
+
+const ProfileFormSelect: React.FC<ProfileFormSelectProps> = ({
   name,
   label,
   placeholder,
@@ -225,4 +279,4 @@ const SignupFormSelect: React.FC<SignupFormSelectProps> = ({
   );
 };
 
-export default SignupForm;
+export default ProfileForm;

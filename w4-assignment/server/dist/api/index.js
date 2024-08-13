@@ -12,7 +12,11 @@ require("../src/utils/passport");
 const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: "https://axlfrontendauth.vercel.app",
+    origin: [
+        "https://axlfrontendauth.vercel.app",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
     credentials: true,
 }));
 // a
@@ -32,5 +36,5 @@ app.get("/", (req, res) => {
 });
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port http://127.0.0.1:${PORT}`);
 });
