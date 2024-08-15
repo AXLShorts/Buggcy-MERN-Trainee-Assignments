@@ -20,8 +20,8 @@ const signupSchema = zod_1.z.object({
 const updateProfileSchema = zod_1.z.object({
     name: zod_1.z.string().min(2),
     email: zod_1.z.string().email(),
-    oldPassword: zod_1.z.string().min(6),
-    newPassword: zod_1.z.string().min(6),
+    oldPassword: zod_1.z.string().optional(),
+    newPassword: zod_1.z.string().optional(),
     age: zod_1.z.number().int().positive(),
     profilePicture: zod_1.z.string().optional(),
     gender: zod_1.z.string(),
@@ -101,27 +101,46 @@ exports.getAllUsers = getAllUsers;
 const updateProfile = async (req, res) => {
     try {
         const { name, email, oldPassword, newPassword, age, gender, profilePicture, } = updateProfileSchema.parse(req.body);
-        // Find the user by email
-        const user = await prisma_1.default.user.findUnique({ where: { email } });
+        const reqUser = req.user;
+        // Find the user by ID
+        const user = await prisma_1.default.user.findUnique({ where: { id: reqUser.id } });
         // Check if the user exists and the old password matches
-        if (!user || !(await bcryptjs_1.default.compare(oldPassword, user.password))) {
+        if (oldPassword !== "" &&
+            (!user || !(await bcryptjs_1.default.compare(oldPassword || "", user.password)))) {
             return res.status(401).json({ message: "Invalid password" });
         }
         // Hash the new password
-        const hashedPassword = await bcryptjs_1.default.hash(newPassword, 10);
+        const hashedPassword = await bcryptjs_1.default.hash(newPassword || "", 10);
         // Update the user profile
-        const updatedUser = await prisma_1.default.user.update({
-            where: { id: user?.id },
-            data: {
-                name,
-                email,
-                password: hashedPassword,
-                age,
-                gender,
-                profilePicture,
-            },
-        });
-        res.json(updatedUser);
+        if (oldPassword === newPassword &&
+            oldPassword === "" &&
+            newPassword === "") {
+            const updatedUser = await prisma_1.default.user.update({
+                where: { id: user?.id },
+                data: {
+                    name,
+                    email,
+                    age,
+                    gender,
+                    profilePicture,
+                },
+            });
+            res.json(updatedUser);
+        }
+        else {
+            const updatedUser = await prisma_1.default.user.update({
+                where: { id: user?.id },
+                data: {
+                    name,
+                    email,
+                    password: hashedPassword,
+                    age,
+                    gender,
+                    profilePicture,
+                },
+            });
+            res.json(updatedUser);
+        }
     }
     catch (error) {
         res.status(400).json({ message: error.message });
@@ -129,12 +148,12 @@ const updateProfile = async (req, res) => {
 };
 exports.updateProfile = updateProfile;
 const logout = async (req, res) => {
-    res.setHeader("Set-Cookie", cookie_1.default.serialize("token", "", {
+    res.setHeader("Set-Cookie", cookie_1.default.serialize("token", "/", {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV !== "development", // secure flag true in production
         sameSite: "strict",
-        maxAge: 60 * 60 * 24 * 7,
-        expires: new Date(Date.now() + 60 * 60 * 24 * 7 * 1000),
+        expires: new Date(-1), // Set the expiration date to the past
+        maxAge: -1, // Set maxAge to -1 to delete the cookie immediately
         path: "/",
     }));
     res.status(200).json({ message: "Logged out successfully" });

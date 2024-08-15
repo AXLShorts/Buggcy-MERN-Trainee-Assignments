@@ -13,14 +13,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFormState } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import type { Control, FieldPath } from "react-hook-form";
-import { set, z } from "zod";
+import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { signInFormSchema as formSchema } from "../validation/signInFormValidation";
+import Link from "next/link";
 
 const SignInForm = () => {
   const router = useRouter();
@@ -35,16 +36,8 @@ const SignInForm = () => {
     },
   });
 
-  const {
-    formState: { isDirty, dirtyFields },
-  } = form;
-
-  console.log(isDirty);
-  console.log(dirtyFields);
-
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setLoading(true);
-    console.log(values);
     try {
       const response = await axios.post(
         "http://127.0.0.1:4000/api/signin",
@@ -101,6 +94,9 @@ const SignInForm = () => {
         <Button className="w-full" type="submit">
           {loading ? "Signing In..." : "Sign In"}
         </Button>
+        <Link href="/profile">
+          <Button className="w-full">Profile</Button>
+        </Link>
       </form>
     </Form>
   );

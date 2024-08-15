@@ -26,15 +26,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { Control, FieldPath } from "react-hook-form";
 import { z } from "zod";
-import { useToast } from "@/components/ui/use-toast";
 import { updateFormSchema as formSchema } from "../validation/updateFormValidation";
 
-// a
-
 const ProfileForm = ({ user }: { user: any }) => {
-  const { toast } = useToast();
   const handleLogout = async () => {
-    console.log("Logged out 1");
     try {
       await axios
         .post("http://127.0.0.1:4000/api/logout", {
@@ -69,13 +64,7 @@ const ProfileForm = ({ user }: { user: any }) => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
-    if (values.oldPassword === values.newPassword) {
-      toast({
-        variant: "destructive",
-        title: "New Password Cannot Be Same As Old Password",
-      });
-      return;
-    }
+
     const formData = {
       ...values,
       age: values.age ? parseInt(values.age, 10) : undefined,

@@ -13,7 +13,7 @@ export const authenticate = async (
   const token = cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized 1" });
   }
 
   try {
@@ -21,12 +21,12 @@ export const authenticate = async (
     const user = await prisma.user.findUnique({ where: { id: decoded.id } });
 
     if (!user) {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Unauthorized 2" });
     }
 
     req.user = user;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "Unauthorized 3" });
   }
 };

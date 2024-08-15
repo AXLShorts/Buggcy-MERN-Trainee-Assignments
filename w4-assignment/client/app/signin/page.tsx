@@ -1,7 +1,7 @@
 import SignInForm from "@/components/forms/SignInForm";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="w-[100vw] h-[100vh] flex text-center justify-center items-center p-4">
       <div className="flex flex-col gap-8">
@@ -20,4 +20,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

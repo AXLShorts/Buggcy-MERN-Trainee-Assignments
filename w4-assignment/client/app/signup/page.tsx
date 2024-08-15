@@ -1,3 +1,5 @@
+"use client";
+
 import SignUpForm from "@/components/forms/SignUpForm";
 import Link from "next/link";
 
